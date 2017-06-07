@@ -9,6 +9,7 @@ locally, and an instance of Kinetic Request CE running with the
 bundle deployed.
 
 ## Quickstart
+* Copy the `config.example.js` to `config.js`.
 * Modify the **bundleName**, **localPort**, and **kineticWebserver**
   configuration setting in the `config.js` file (other configuration settings
   are relatively universal).
