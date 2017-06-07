@@ -1,8 +1,14 @@
 /* eslint-disable */
 var optionalRequire = require('optional-require')(require);
 var webpack = require('webpack');
-var config = optionalRequire('./config.override') || require('./config');
+var config = optionalRequire('./config');
 var DashboardPlugin = require('webpack-dashboard/plugin');
+
+if (!config) {
+  console.log('Could not find the config.js file. Copy config.example.js, ' +
+    'rename it to config.js, and change values as necessary.');
+  process.exit(1);
+}
 
 console.log('Kinetic Request CE is running at',
   config.kineticWebserver);
