@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { stringify } from 'query-string';
-import { CatalogSearch } from '../components/CatalogSearch';
-import { actions } from '../redux/modules/catalog';
+import { CatalogSearch } from './CatalogSearch';
+import { actions } from '../../redux/modules/catalog';
 
 const stateMapper = state => ({
   searchTerm: state.catalog.get('searchTerm'),

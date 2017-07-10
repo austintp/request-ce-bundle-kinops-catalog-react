@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { MyRequests } from '../components/MyRequests';
+import { MyRequests } from './MyRequests';
 
 const stateMapper = (state, props) => ({
   forms: state.catalog.get('forms'),

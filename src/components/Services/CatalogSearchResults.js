@@ -1,7 +1,7 @@
 import React from 'react';
 import { ServiceCard } from './ServiceCard';
-import { CatalogSearchContainer } from '../containers/CatalogSearchContainer';
-import { NavHeader } from './NavHeader';
+import { CatalogSearchContainer } from './CatalogSearchContainer';
+import { NavHeader } from '../Shared/NavHeader';
 
 export const CatalogSearchResults = ({ query, forms }) =>
   <div>

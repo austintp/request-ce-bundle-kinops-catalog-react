@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CatalogSearchContainer } from '../containers/CatalogSearchContainer';
+import { CatalogSearchContainer } from './Services/CatalogSearchContainer';
 import { CatalogHomeService } from './CatalogHomeService';
-import { CatalogHomeSubmission } from './CatalogHomeSubmission';
-import { QuestionsLink } from './QuestionsLink';
+import { CatalogHomeSubmission } from './Requests/CatalogHomeSubmission';
+import { QuestionsLink } from './Shared/QuestionsLink';
 
 export const Catalog = ({ profile, forms, submissions }) =>
   <div className="content">

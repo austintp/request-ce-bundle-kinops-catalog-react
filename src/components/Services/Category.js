@@ -1,7 +1,7 @@
 import React from 'react';
-import { QuestionsLink } from './QuestionsLink';
+import { QuestionsLink } from '../Shared/QuestionsLink';
 import { ServiceCard } from './ServiceCard';
-import { NavHeader } from './NavHeader';
+import { NavHeader } from '../Shared/NavHeader';
 
 export const Category = ({ category, forms }) =>
   <div>

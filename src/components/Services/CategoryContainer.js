@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Category } from '../components/Category';
+import { Category } from './Category';
 
 const stateMapper = (state, props) => ({
   category:

@@ -5,11 +5,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 import '../styles/master.css';
 import { CatalogContainer } from './CatalogContainer';
-import { CategoryListContainer } from './CategoryListContainer';
-import { CategoryContainer } from './CategoryContainer';
-import { CatalogSearchResultsContainer } from './CatalogSearchResultsContainer';
+import { CategoryListContainer } from './Services/CategoryListContainer';
+import { CategoryContainer } from './Services/CategoryContainer';
+import { CatalogSearchResultsContainer } from '../components/Services/CatalogSearchResultsContainer';
 import { actions } from '../redux/modules/catalog';
-import { MyRequestsContainer } from './MyRequestsContainer';
+import { MyRequestsContainer } from './Requests/MyRequestsContainer';
 
 const stateMapper = state => ({
   catalog: state.catalog,

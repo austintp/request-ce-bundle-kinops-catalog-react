@@ -2,7 +2,7 @@ import React from 'react';
 import { Map } from 'immutable';
 import { Link } from 'react-router-dom';
 import { CatalogHomeSubmission } from './CatalogHomeSubmission';
-import { NavHeader } from './NavHeader';
+import { NavHeader } from '../Shared/NavHeader';
 
 const modeToCoreState = Map({
   Draft: 'Draft',

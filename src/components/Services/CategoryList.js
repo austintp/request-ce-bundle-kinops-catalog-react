@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { QuestionsLink } from './QuestionsLink';
-import { NavHeader } from './NavHeader';
+import { QuestionsLink } from '../Shared/QuestionsLink';
+import { NavHeader } from '../Shared/NavHeader';
 
 const countMatchingForms = (category, forms) =>
   forms

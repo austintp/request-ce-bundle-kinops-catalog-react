@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Catalog } from '../components/Catalog';
+import { Catalog } from './Catalog';
 
 const stateMapper = state => ({
   profile: state.catalog.get('profile'),

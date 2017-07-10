@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { parse } from 'query-string';
-import { CatalogSearchResults } from '../components/CatalogSearchResults';
+import { CatalogSearchResults } from './CatalogSearchResults';
 
 const matches = (form, term) =>
   form.name.toLowerCase().includes(term.toLowerCase()) ||

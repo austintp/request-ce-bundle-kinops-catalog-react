@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { CategoryList } from '../components/CategoryList';
+import { CategoryList } from './CategoryList';
 
 const stateMapper = state => ({
   categories: state.catalog.get('categories'),

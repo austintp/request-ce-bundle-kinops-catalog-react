@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { createHashHistory } from 'history';
 
 import './globals';
-import { AppContainer } from './containers/AppContainer';
+import { AppContainer } from './components/AppContainer';
 import { configureStore } from './redux/store';
 
 // This src/index.js file is the main entry into the React application.  It does
@@ -57,4 +57,4 @@ const render = () => {
 render();
 
 // Triggers subsequent re-renders after code changes are detected.
-if (module.hot) module.hot.accept('./containers/AppContainer', render);
+if (module.hot) module.hot.accept('./components/AppContainer', render);
