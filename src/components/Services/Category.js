@@ -1,6 +1,6 @@
 import React from 'react';
 import { QuestionsLink } from '../Shared/QuestionsLink';
-import { ServiceCard } from './ServiceCard';
+import { ServiceCardLarge } from './ServiceCard';
 import { NavHeader } from '../Shared/NavHeader';
 
 export const Category = ({ category, forms }) =>
@@ -19,7 +19,7 @@ export const Category = ({ category, forms }) =>
           <div className="col-sm-12">
             <h3>Services</h3>
             <div className="service-items row">
-              { forms.map(form => <ServiceCard form={form} key={form.slug} />) }
+              { forms.map(form => <ServiceCardLarge form={form} key={form.slug} />) }
             </div>
           </div>
         </div>

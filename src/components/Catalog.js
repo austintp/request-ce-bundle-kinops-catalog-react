@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CatalogSearchContainer } from './Services/CatalogSearchContainer';
-import { CatalogHomeService } from './CatalogHomeService';
+import { ServiceCardSmall } from './Services/ServiceCard';
 import { CatalogHomeSubmission } from './Requests/CatalogHomeSubmission';
 import { QuestionsLink } from './Shared/QuestionsLink';
 
@@ -62,7 +62,7 @@ export const Catalog = ({ profile, forms, submissions }) =>
                 forms
                   .filter(form => form.categories.indexOf('home-page-services') > -1)
                   .take(5)
-                  .map(form => <CatalogHomeService form={form} key={form.slug} />)
+                  .map(form => <ServiceCardSmall form={form} key={form.slug} />)
               }
             </div>
           </div>

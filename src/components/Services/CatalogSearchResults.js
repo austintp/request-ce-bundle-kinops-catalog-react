@@ -1,5 +1,5 @@
 import React from 'react';
-import { ServiceCard } from './ServiceCard';
+import { ServiceCardLarge } from './ServiceCard';
 import { CatalogSearchContainer } from './CatalogSearchContainer';
 import { NavHeader } from '../Shared/NavHeader';
 
@@ -25,7 +25,7 @@ export const CatalogSearchResults = ({ query, forms }) =>
           <span className="label label-default">{query}</span>
         </h3>
         <div className="row">
-          { forms.map(form => <ServiceCard form={form} key={form.slug} />) }
+          { forms.map(form => <ServiceCardLarge form={form} key={form.slug} />) }
         </div>
       </section>
     </div>
