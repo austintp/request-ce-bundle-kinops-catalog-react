@@ -40,7 +40,34 @@ module.exports = {
         headers: { 'X-Webpack-Bundle-Name' : config.bundleName },
         secure: false,
         autoRewrite: true,
-        protocolRewrite: 'http'
+        protocolRewrite: 'http',
+        onError: function(err, req, res) {
+          var message;
+          switch(err.code) {
+            case 'ENOTFOUND':
+              message = 'Could not resolve address for ' + err.hostname +
+                '. Double check the kineticWebserver property in config.js.';
+              break;
+            case 'ECONNREFUSED':
+              message = 'Could not connect to specified kineticWebserver (' +
+                config.kineticWebserver + '). The hostname resolved to the ' +
+                'following address: ' + err.address + '. Check that the ' +
+                'address and port number are correct.';
+              break;
+            case 'EPROTO':
+              message = 'Got protocol error while proxying request to ' +
+                config.kineticWebserver + '. Ensure that the protocol ' +
+                'specified by the kineticWebserver property in config.js ' +
+                '(either http:// or https://) matches the protocol used ' +
+                'by the application web server.';
+              break;
+            default:
+              message = 'Got ' + err.code + ' while proxying request to ' +
+                config.kineticWebserver;
+          }
+          res.writeHead(502, { 'Content-Type': 'text/plain' });
+          res.end(message);
+        }
       }
     }
   },
