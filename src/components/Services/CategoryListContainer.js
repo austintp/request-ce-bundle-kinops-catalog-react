@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { CategoryList } from './CategoryList';
 
-const stateMapper = state => ({
-  categories: state.catalog.get('categories'),
-  forms: state.catalog.get('forms'),
+const mapStateToProps = state => ({
+  categories: state.categories.data,
+  forms: state.forms.data,
 });
 
-export const CategoryListContainer = connect(stateMapper)(CategoryList);
+export const CategoryListContainer = connect(mapStateToProps)(CategoryList);

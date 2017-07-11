@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 import { Catalog } from './Catalog';
 
 const stateMapper = state => ({
-  profile: state.catalog.get('profile'),
-  categories: state.catalog.get('categories'),
-  forms: state.catalog.get('forms'),
-  submissions: state.catalog.get('submissions'),
+  profile: state.profile.data,
+  categories: state.categories.data,
+  forms: state.forms.data,
+  submissions: state.submissions.data,
 });
 
 export const CatalogContainer = connect(stateMapper)(Catalog);

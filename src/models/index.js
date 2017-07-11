@@ -1,5 +1,5 @@
 const getAttributeValue = (object, attributeName, defaultValue = null) => {
-  const attribute = object.attributes.find(attr => attr.name === attributeName);
+  const attribute = object.attributes[attributeName];
   const value = attribute && attribute.values[0];
   return value || defaultValue;
 };
