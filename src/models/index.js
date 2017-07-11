@@ -1,6 +1,6 @@
 const getAttributeValue = (object, attributeName, defaultValue = null) => {
   const attribute = object.attributes[attributeName];
-  const value = attribute && attribute.values[0];
+  const value = attribute && attribute[0];
   return value || defaultValue;
 };
 
