@@ -3,18 +3,23 @@ import { CoreForm } from 'react-kinetic-core';
 import { NavHeader } from '../Shared/NavHeader';
 import { kappSlug } from '../../constants';
 
-export const Form = () =>
+export const buildBreadcrumbs = (form, category) =>
+  category
+    ? [
+      { title: 'Categories', path: '/categories' },
+      { title: category.name, path: `/categories/${category.slug}` },
+      { title: form.name },
+    ]
+    : [
+      { title: form.name },
+    ];
+
+export const Form = ({ form, category }) =>
   <div>
-    <NavHeader
-      breadcrumbs={[
-        { title: 'Categories', path: '/categories' },
-        { title: 'Facilities', path: '/categories/facilities' },
-        { title: 'iPad request' },
-      ]}
-    />
+    <NavHeader breadcrumbs={buildBreadcrumbs(form, category)} />
     <CoreForm
       kapp={kappSlug}
-      form="cleaning"
+      form={form.slug}
       globals={() => import('../../globals')}
     />
   </div>;

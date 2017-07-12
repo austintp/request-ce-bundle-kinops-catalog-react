@@ -19,7 +19,11 @@ export const Category = ({ category, forms }) =>
           <div className="col-sm-12">
             <h3>Services</h3>
             <div className="service-items row">
-              { forms.map(form => <ServiceCardLarge form={form} key={form.slug} />) }
+              {
+                forms
+                  .map(form => ({ form, categorySlug: category.slug, key: form.slug }))
+                  .map(props => <ServiceCardLarge {...props} />)
+              }
             </div>
           </div>
         </div>

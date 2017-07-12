@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ServiceCardTop = ({ form }) =>
   <div className="service-icon-wrapper">
@@ -7,24 +8,32 @@ const ServiceCardTop = ({ form }) =>
     </div>
   </div>;
 
-const ServiceCardBottom = ({ form }) =>
+const ServiceCardBottom = ({ form, categorySlug }) =>
   <div className="service-details-wrapper">
     <h5 className="ellipsis">
-      <a href="/bens-playground/services/cleaning">{form.name}</a>
+      <Link
+        to={
+          categorySlug
+            ? `/categories/${categorySlug}/forms/${form.slug}`
+            : `/forms/${form.slug}`
+        }
+      >
+        {form.name}
+      </Link>
     </h5>
     <p className="ellipsis">{form.description}</p>
   </div>;
 
-export const ServiceCardLarge = ({ form }) =>
+export const ServiceCardLarge = ({ form, categorySlug }) =>
   <div className="card-wrapper col-xs-12">
     <div className="service-card clearfix">
       <ServiceCardTop form={form} />
-      <ServiceCardBottom form={form} />
+      <ServiceCardBottom form={form} categorySlug={categorySlug} />
     </div>
   </div>;
 
-export const ServiceCardSmall = ({ form }) =>
+export const ServiceCardSmall = ({ form, categorySlug }) =>
   <div className="clearfix submission">
     <ServiceCardTop form={form} />
-    <ServiceCardBottom form={form} />
+    <ServiceCardBottom form={form} categorySlug={categorySlug} />
   </div>;
