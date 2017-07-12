@@ -1,0 +1,81 @@
+// Core variables and mixins
+@import "variables";
+@import "mixins";
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *   Footer
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ 
+html{
+  position: relative;
+  min-height: 100%;
+  body {
+    margin-bottom: $footer-height;
+  }
+}
+
+footer#shared-bundle-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: $footer-height;
+  background-color: $lightestgray;
+  margin-top: 1rem;
+  padding: 1rem 0;
+  color: $gray;
+  font-size: inherit;
+  dl {
+    margin: 0;
+  }
+
+  .container {
+    padding: 0;
+  }
+  
+  ul {
+    list-style: none;
+  
+    li {
+      float: left;
+      
+      a {
+        margin-right: 1rem;
+        color: $gray;
+      }
+    }
+    
+    li:not(:first-child):before { 
+      content: "\00b7"; 
+      padding-right: 1rem;
+    }
+  }
+  
+  div.brand-subtle {
+    float: left;
+    opacity: .7;
+    margin-right: 1rem;
+  }
+  
+  div.copyright {
+    text-align: right;
+  }
+}
+
+@media (max-width: 768px) {
+  footer#shared-bundle-footer {
+  
+    .container {
+      padding: 0 1rem;
+      
+      .row {
+        margin-left: -1rem;
+        margin-right: -1rem;
+      }
+    }
+    
+    div.copyright {
+      text-align: left;
+    }
+  }
+}

@@ -2,9 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.css';
-import '../styles/master.css';
+import '../styles';
 import { CatalogContainer } from './CatalogContainer';
 import { CategoryListContainer } from './Services/CategoryListContainer';
 import { CategoryContainer } from './Services/CategoryContainer';
@@ -14,6 +12,7 @@ import { actions as formsActions } from '../redux/modules/forms';
 import { actions as profileActions } from '../redux/modules/profile';
 import { actions as submissionsActions } from '../redux/modules/submissions';
 import { MyRequestsContainer } from './Requests/MyRequestsContainer';
+import { FormContainer } from './Services/FormContainer';
 
 const mapStateToProps = ({ categories, forms, profile, submissions }) => ({
   loading: categories.loading || forms.loading || profile.loading || submissions.loading,
@@ -38,6 +37,8 @@ export const App = props => {
       <Route exact path="/" component={CatalogContainer} />
       <Route exact path="/categories" component={CategoryListContainer} />
       <Route exact path="/categories/:categorySlug" component={CategoryContainer} />
+      <Route exact path="/categories/:categorySlug/forms/:formSlug" component={FormContainer} />
+      <Route exact path="/forms/:formSlug" component={FormContainer} />
       <Route exact path="/search" component={CatalogSearchResultsContainer} />
       <Route exact path="/requests" component={MyRequestsContainer} />
       <Route path="/requests/:mode" component={MyRequestsContainer} />

@@ -54,6 +54,7 @@
     "font-awesome": "^4.7.0",
     "history": "^4.6.3",
     "immutable": "4.0.0-rc.2",
+    "jquery": "^3.2.1",
     "moment": "^2.18.1",
     "query-string": "^4.3.4",
     "react": "^15.6.1",
@@ -65,7 +66,10 @@
     "recompose": "^0.23.5",
     "redux": "^3.7.1",
     "redux-form": "5.3.6",
-    "redux-saga": "^0.15.4"
+    "redux-saga": "^0.15.4",
+    "typeface-montserrat": "^0.0.31",
+    "typeface-source-sans-pro": "^0.0.31",
+    "underscore": "^1.8.3"
   },
   "jest": {
     "moduleNameMapper": {

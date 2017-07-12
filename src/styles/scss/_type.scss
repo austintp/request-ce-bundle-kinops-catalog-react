@@ -1,0 +1,82 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *   Type
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+ // heading, display classes, block quote, lists, and horizontal rule
+
+/* Miscellaneous Elements
+ *-------------------------------------- */
+// Truncates long text with ellipsis
+.ellipsis {
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Labels
+ *-------------------------------------- */
+.label {
+  font-size: 85%;
+  padding: 0.1rem 0.6rem 0.2rem;
+}
+
+/* Text utilities
+ *-------------------------------------- */
+.uppercase {
+  text-transform: uppercase;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.strong {
+  font-weight: bold;
+}
+.underline {
+  text-decoration: underline;
+}
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Headings
+ *-------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Montserrat', sans-serif;
+  //font-weight: 700;
+  color: $gray;
+  > small {
+    line-height: inherit;
+  }
+  > .label, .base-font {
+    font-family: $font-family-base;
+  }
+}
+
+h6, .h6 {
+  @include font-size-line-height(1.6rem, 2rem);
+}
+
+h5, .h5 {
+  @include font-size-line-height(1.8rem, 2.2rem);
+}
+
+h4, .h4 {
+  @include font-size-line-height(2rem, 2.4rem);
+  }
+
+h3, .h3 {
+  @include font-size-line-height(2.2rem, 2.6rem);
+}
+
+h2, .h2 {
+  @include font-size-line-height(2.4rem, 2.8rem);
+}
+
+h1, .h1 {
+  @include font-size-line-height(2.6rem, 3rem);
+}

@@ -1,0 +1,433 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *   Submissions
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* My Requests Page
+ *-------------------------------------- */
+
+.requests-nav {
+  margin-bottom: 2rem;
+  badge {
+    pointer-events: none;
+    display: inline-block;
+    min-width: 10px;
+    padding: 0.3rem 0.7rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.2rem;
+    color: white;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #777777;
+    @include border-radius(1rem);
+    margin-left: 0.4rem;
+    transition: all 0.5s ease;
+    &:empty {
+      visibility: hidden;
+      font-size: 0;
+    }
+  }
+  li.active {
+    badge {
+      background: $tertiary;
+    }
+  }
+}
+
+div.requests {
+  .submission {
+    margin-bottom: 2rem;
+    padding: 1rem 2rem;
+    background-color: $white;
+    box-shadow: 0 1px 2px rgba($primary,0.14);
+    @include border-radius();
+    > div {
+      padding: 0;
+      margin: 0;
+      
+      &.service-icon-wrapper {
+        float: left;
+      }
+      &.service-details-wrapper {
+        margin-left: 7.2rem;
+      }
+    }
+    > h3 {
+      @include border-top-radius();
+      margin: 0;
+      span {
+        padding: 0;
+      }
+      .status {
+        text-align: right;
+      }
+    }
+    h5 {
+      padding: 0.2rem 0 0;
+      margin: 0;
+      font-weight: 700;
+      color: $primary;
+    }
+    h6 {
+      padding: 0.4rem 0;
+      margin: 0;
+      color: $primary;
+      font-weight: 100;
+    }
+    ul.meta {
+      font-size: 0.8571428571em;
+      margin-bottom: 0;
+      margin-left: 0;
+      strong{
+        font-weight: 700;
+      }
+      li{
+        padding-left: 0;
+      }
+      li:not(:last-child):after {
+        content: "|";
+        margin-left: 0.5rem;
+      }
+    }
+    ul.actions{
+      margin: 0.5rem 0;
+      .btn{
+        &.btn-link{
+          padding-right: 0;
+          &:not(:last-child):after {
+            content: "|";
+            margin-left: 0.7rem;
+          }
+        }
+      }
+    }
+  }
+  .submission.submitted{
+    > h3 {
+      background-color: subtle($primary, 95%);
+      border-bottom: .1rem solid subtle($primary, 80%);
+    }
+  }
+  .submission.draft{
+    > h3 {
+      border-bottom: .1rem solid $primary;
+      background-color: subtle($primary, 65%);
+      color: $white;
+    }
+  }
+  .submission.closed{
+    > h3 {
+      background-color: subtle($gray, 90%);
+      border-bottom: .1rem solid subtle($gray, 80%);
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  div.requests {
+    .submission {
+      > div {
+        &.service-icon-wrapper {
+          display: none;
+        }
+        &.service-details-wrapper {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+/* Submission Details / Activities
+ *-------------------------------------- */
+
+i.fa-close {
+  cursor: pointer;
+}
+
+.submission-details {
+  .form {
+    h4 {
+      padding-top:0;
+      margin-top: 0;
+      display: inline-block;
+    }
+  }
+  .details {
+    > * {
+      padding: 0;
+      margin: 0;
+      line-height: 3rem;
+    }
+  }
+  h4.row.buttons-header {
+    padding: 0;
+  }
+  .timeline {
+      > li {
+        margin: 0;
+        float: none;
+        span {
+          margin-right: 4px;
+
+          &.title {
+            font-weight: bold;
+            &:after {
+              content: ":";
+            }
+          }
+        }
+        &:not(:last-child):after {
+          width: calc(50% + 1px);
+          width: -moz-calc(50% + 1px);
+          width: -webkit-calc(50% + 1px);
+          height: 2rem;
+          margin-top: 0;
+          border-right: .2rem solid $gray;
+        }
+        &.processing {
+          height: 10rem;
+          background-color: $lightestgray;
+          padding: 4rem;
+        }
+        > .start,
+        > .finish  {
+          width: 15rem;
+          color: $white;
+          background-color: $primary;
+          @include border-radius();
+          margin: auto;
+          padding: .5rem;
+          line-height: 1.5rem;
+        }
+        width: 100%;
+        > .timeline-badge {
+          display: none;
+        }
+        > .timeline-panel{
+          width: 100%;
+          background-color: $white;
+          border: none;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+          &:before {
+            content: none;
+          }
+          .timeline-heading {
+            background: $secondary;
+            color: white;
+            h4 {
+              color: white;
+            }
+          }
+          .timeline-body {
+            div.row {
+              padding: 1rem 1.5rem;
+
+              > span.fa {
+                float: right;
+                margin-right: 1rem;
+
+                &.fa-thumbs-o-up {
+                  color: #2b542c;
+                }
+                &.fa-thumbs-o-down {
+                  color: #a94442;
+                }
+              }
+            }
+          }
+          &.grey {
+            background-color: $lightestgray;
+/*             .timeline-heading { */
+/*               background: $lightgray; */
+/*               h4 { */
+/*                 background: $lightestgray; */
+/*                 height: 2rem; */
+/*                 display: block; */
+/*                 margin-left: .5rem; */
+/*                 margin-right: .5rem; */
+/*                 @include border-radius(); */
+/*               } */
+/*             } */
+            .placeholder-time {
+              height: 2rem;
+              width: 10rem;
+              display: block;
+              margin-bottom: 1rem;
+              background: $lightgray;
+              @include border-radius();
+            }
+            .placeholder-time:nth-child(2) {
+              width: 15rem;
+            }
+            .placeholder-desc {
+              height: 5rem;
+              width: 100%;
+              display: block;
+              background: $lightgray;
+              @include border-radius();
+            }
+          }
+        }
+      }
+    }
+}
+
+/* My Requests Homepage
+ *-------------------------------------- */
+
+div.homepage-requests,
+div.homepage-popular-services {
+  .submission {
+    padding-bottom: 1.5rem;
+    &:not(:last-child){
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid $lightgray;
+    }
+    >div {
+      padding: 0;
+      margin: 0;
+      
+      &.service-icon-wrapper {
+        float: left;
+      }
+      &.service-details-wrapper {
+        margin-left: 7.2rem;
+      }
+    }
+    h5 {
+      padding: 0;
+      margin: 0.2rem 0 0;
+      a {
+        padding: 0;
+      }
+    }
+    h6{
+      padding: 0.4rem 0;
+      margin: 0;
+      color: $primary;
+      font-weight: 100;
+    }
+    p{
+      margin:0;
+    }
+    .requestors, .dates {
+      padding: 0;
+    }
+    ul.meta{
+      font-size: 0.8571428571em;
+      margin-bottom: 0;
+      margin-left: 0;
+      strong{
+        font-weight: 700;
+      }
+      li{
+        padding-left: 0;
+      }
+      li:not(:last-child):after {
+        content: "|";
+        margin-left: 0.5rem;
+      }
+    }
+    &.submitted {
+      badge {
+        border: .1rem solid rgba($primary, .3);
+        background-color: rgba($primary, .05);
+      }
+    }
+    &.draft{
+      badge {
+        border: .1rem solid rgba($primary, .3);
+        background-color: subtle($primary, 65%);
+      }
+    }
+    &.closed{
+      badge {
+        border: .1rem solid subtle($gray, 80%);
+        background-color: subtle($gray, 90%);
+      }
+    }
+  }
+}
+
+.submission-meta{
+  h5 {
+    padding: 0;
+    margin: 0.2rem 0 0;
+    a {
+      padding: 0;
+    }
+  }
+  h6{
+    padding: 0.4rem 0;
+    margin: 0;
+    color: $primary;
+    font-weight: 100;
+  }
+  p{
+    margin:0;
+  }
+  hr{
+    border-color: $white;
+  }
+  ul.action-buttons{
+    font-size: 0.8571428571em;
+    margin-bottom: 0;
+    strong{
+      font-weight: 700;
+    }
+    li{
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+/* Media Queries
+ *-------------------------------------- */
+
+@media (max-width: 767px) {
+  div.requests {
+    .submission {
+      > h3 {
+        padding: 0 1rem;
+        span {
+          padding: .5rem 0;
+        }
+        .status {
+          text-align: left;
+        }
+      }
+      > div {
+
+        > div {
+          padding: 0 1rem;
+        }
+        .form {
+          padding: 0;
+          h4 {
+            padding-top: 0;
+            margin-top: 0;
+            display: inline-block;
+            vertical-align: super;
+          }
+        }
+      }
+      .actions {
+        padding: 1rem 0;
+      }
+    }
+  }
+}
+@media (max-width: 991px) {
+
+
+}
+@media (min-width: 992px) {
+  .submission-details {
+    .right-column{
+      padding: 0;
+    }
+  }
+}
