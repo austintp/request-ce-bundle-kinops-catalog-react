@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import { fetchForms } from 'react-kinetic-core/src/apis/forms';
+import { FormsAPI } from 'react-kinetic-core';
 
 import { kappSlug } from '../../constants';
 import { actions, types } from '../modules/forms';
@@ -8,7 +8,7 @@ import { actions as systemErrorActions } from '../modules/systemError';
 
 export function* fetchFormsSaga() {
   const { forms, errors, serverError } =
-    yield call(fetchForms, { kappSlug, include: 'categorizations,attributes' });
+    yield call(FormsAPI.fetchForms, { kappSlug, include: 'categorizations,attributes' });
 
   if (serverError) {
     yield put(systemErrorActions.setSystemError(serverError));
