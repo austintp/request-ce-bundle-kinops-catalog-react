@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { MyRequests } from './MyRequests';
+import { RequestList } from './RequestList';
 
 const mapStateToProps = (state, props) => ({
   forms: state.forms.data,
@@ -7,4 +7,4 @@ const mapStateToProps = (state, props) => ({
   mode: props.match.params.mode,
 });
 
-export const MyRequestsContainer = connect(mapStateToProps)(MyRequests);
+export const RequestListContainer = connect(mapStateToProps)(RequestList);

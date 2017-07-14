@@ -11,7 +11,7 @@ import { actions as categoriesActions } from '../redux/modules/categories';
 import { actions as formsActions } from '../redux/modules/forms';
 import { actions as profileActions } from '../redux/modules/profile';
 import { actions as submissionsActions } from '../redux/modules/submissions';
-import { MyRequestsContainer } from './Requests/MyRequestsContainer';
+import { RequestListContainer } from './Requests/RequestListContainer';
 import { FormContainer } from './Services/FormContainer';
 
 const mapStateToProps = ({ categories, forms, profile, submissions }) => ({
@@ -42,7 +42,7 @@ export const App = props => {
       <Route path="/categories/:categorySlug/:formSlug" component={FormContainer} />
       <Route path="/forms/:formSlug" component={FormContainer} />
       <Route exact path="/search" component={CatalogSearchResultsContainer} />
-      <Route exact path="/requests" component={MyRequestsContainer} />
+      <Route exact path="/requests" component={RequestListContainer} />
       <Route exact path="/requests/:submissionId" component={FormContainer} />
       <Route exact path="/requests/:submissionId/:mode" component={RequestActivityContainer} />
     </div>

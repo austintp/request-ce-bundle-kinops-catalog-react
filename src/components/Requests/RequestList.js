@@ -15,7 +15,7 @@ const countByMode = (submissions, mode) =>
     .filter(submission => submission.coreState === modeToCoreState.get(mode))
     .count();
 
-export const MyRequests = ({ submissions, forms, mode, match }) =>
+export const RequestList = ({ submissions, forms, mode, match }) =>
   <div>
     <NavHeader breadcrumbs={[{ title: 'My Requests', path: '/requests' }]} />
     <br />
