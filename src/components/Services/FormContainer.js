@@ -24,23 +24,24 @@ export const getSubmissionId = props =>
     ? props.match.params.submissionId
     : props.location.pathname.replace(props.match.url, '').replace('/', '');
 
+export const handleCompleted = props => response => {
+  props.push(`/requests/${response.submission.id}/confirmation`);
+};
+
+export const handleCreated = props => response => {
+  props.push(
+    response.submission.coreState === 'Submitted'
+      ? `/requests/${response.submission.id}/confirmation`
+      : `${props.match.url}/${response.submission.id}`,
+  );
+};
+
 export const mapDispatchToProps = { push };
 
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withState('submissionId', '_', getSubmissionId),
-  withHandlers({
-    handleCompleted: props => response => {
-      props.push(`/requests/${response.submission.id}/confirmation`);
-    },
-    handleCreated: props => response => {
-      props.push(
-        response.submission.coreState === 'Submitted'
-          ? `/requests/${response.submission.id}/confirmation`
-          : `${props.match.url}/${response.submission.id}`,
-      );
-    },
-  }),
+  withHandlers({ handleCompleted, handleCreated }),
 );
 
 export const FormContainer = enhance(Form);
