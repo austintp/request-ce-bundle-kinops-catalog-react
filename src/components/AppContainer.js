@@ -39,10 +39,8 @@ export const App = props => {
       <Route exact path="/" component={CatalogContainer} />
       <Route exact path="/categories" component={CategoryListContainer} />
       <Route exact path="/categories/:categorySlug" component={CategoryContainer} />
-      <Route exact path="/categories/:categorySlug/:formSlug" component={FormContainer} />
-      <Route exact path="/categories/:categorySlug/:formSlug/:submissionId" component={FormContainer} />
-      <Route exact path="/forms/:formSlug" component={FormContainer} />
-      <Route exact path="/forms/:formSlug/:submissionId" component={FormContainer} />
+      <Route path="/categories/:categorySlug/:formSlug" component={FormContainer} />
+      <Route path="/forms/:formSlug" component={FormContainer} />
       <Route exact path="/search" component={CatalogSearchResultsContainer} />
       <Route exact path="/requests" component={MyRequestsContainer} />
       <Route exact path="/requests/:submissionId" component={FormContainer} />

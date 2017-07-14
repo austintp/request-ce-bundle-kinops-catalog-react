@@ -44,6 +44,7 @@ export const Form =
               form={form.slug}
               globals={globals}
               created={handleCreated}
+              completed={handleCompleted}
             />
           )
         }
