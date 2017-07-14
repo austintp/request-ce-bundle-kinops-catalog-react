@@ -26,6 +26,8 @@ const mapDispatchToProps = {
   fetchSubmissions: submissionsActions.fetchSubmissions,
 };
 
+const RequestActivityContainer = () => <div />;
+
 export const App = props => {
   if (props.loading) {
     return <div>Loading catalog data...</div>;
@@ -37,11 +39,14 @@ export const App = props => {
       <Route exact path="/" component={CatalogContainer} />
       <Route exact path="/categories" component={CategoryListContainer} />
       <Route exact path="/categories/:categorySlug" component={CategoryContainer} />
-      <Route exact path="/categories/:categorySlug/forms/:formSlug" component={FormContainer} />
+      <Route exact path="/categories/:categorySlug/:formSlug" component={FormContainer} />
+      <Route exact path="/categories/:categorySlug/:formSlug/:submissionId" component={FormContainer} />
       <Route exact path="/forms/:formSlug" component={FormContainer} />
+      <Route exact path="/forms/:formSlug/:submissionId" component={FormContainer} />
       <Route exact path="/search" component={CatalogSearchResultsContainer} />
       <Route exact path="/requests" component={MyRequestsContainer} />
-      <Route path="/requests/:mode" component={MyRequestsContainer} />
+      <Route exact path="/requests/:submissionId" component={FormContainer} />
+      <Route exact path="/requests/:submissionId/:mode" component={RequestActivityContainer} />
     </div>
   );
 };

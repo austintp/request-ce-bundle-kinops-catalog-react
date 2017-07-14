@@ -14,7 +14,7 @@ const ServiceCardBottom = ({ form, categorySlug }) =>
       <Link
         to={
           categorySlug
-            ? `/categories/${categorySlug}/forms/${form.slug}`
+            ? `/categories/${categorySlug}/${form.slug}`
             : `/forms/${form.slug}`
         }
       >
