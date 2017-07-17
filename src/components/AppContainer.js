@@ -12,6 +12,7 @@ import { actions as formsActions } from '../redux/modules/forms';
 import { actions as profileActions } from '../redux/modules/profile';
 import { actions as submissionsActions } from '../redux/modules/submissions';
 import { RequestListContainer } from './Requests/RequestListContainer';
+import { RequestShowContainer } from './Requests/RequestShowContainer';
 import { FormContainer } from './Services/FormContainer';
 
 const mapStateToProps = ({ categories, forms, profile, submissions }) => ({
@@ -25,8 +26,6 @@ const mapDispatchToProps = {
   fetchProfile: profileActions.fetchProfile,
   fetchSubmissions: submissionsActions.fetchSubmissions,
 };
-
-const RequestActivityContainer = () => <div />;
 
 export const App = props => {
   if (props.loading) {
@@ -44,7 +43,7 @@ export const App = props => {
       <Route exact path="/search" component={CatalogSearchResultsContainer} />
       <Route exact path="/requests" component={RequestListContainer} />
       <Route exact path="/requests/:submissionId" component={FormContainer} />
-      <Route exact path="/requests/:submissionId/:mode" component={RequestActivityContainer} />
+      <Route exact path="/requests/:submissionId/:mode" component={RequestShowContainer} />
     </div>
   );
 };
