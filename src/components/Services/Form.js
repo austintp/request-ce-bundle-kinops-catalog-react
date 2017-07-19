@@ -1,7 +1,7 @@
 import React from 'react';
 import { CoreForm } from 'react-kinetic-core';
 import { NavHeader } from '../Shared/NavHeader';
-import { kappSlug } from '../../constants';
+import { SERVICES_KAPP as kappSlug } from '../../constants';
 
 // Asynchronously import the global dependencies that are used in the embedded
 // forms. Note that we deliberately do this as a const so that it should start

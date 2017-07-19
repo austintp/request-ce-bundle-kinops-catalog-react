@@ -2,7 +2,7 @@ import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import { bundle, SubmissionsAPI } from 'react-kinetic-core';
 
-import { kappSlug } from '../../constants';
+import { SERVICES_KAPP as kappSlug } from '../../constants';
 import { actions, types } from '../modules/submissions';
 import { actions as systemErrorActions } from '../modules/systemError';
 

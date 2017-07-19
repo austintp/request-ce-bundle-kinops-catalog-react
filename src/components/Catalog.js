@@ -42,7 +42,13 @@ export const Catalog = ({ profile, forms, submissions }) =>
               {
                 submissions
                   .take(5)
-                  .map(s => <CatalogHomeSubmission submission={s} forms={forms} key={s.id} />)
+                  .map(submission => ({
+                    submission,
+                    forms,
+                    key: submission.id,
+                    titleLink: `/requests/${submission.id}/activity`,
+                  }))
+                  .map(props => <CatalogHomeSubmission {...props} />)
               }
             </div>
           </div>

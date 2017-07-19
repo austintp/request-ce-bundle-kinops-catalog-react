@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { RequestActionListContainer } from './RequestActionListContainer';
 
 const statusLabels = {
   Draft: 'label-warning',
@@ -14,7 +15,7 @@ const getFormIcon = (submission, forms) =>
     .map(form => form.icon)
     .first() || 'fa-cube';
 
-export const CatalogHomeSubmission = ({ submission, forms, includeActions }) =>
+export const CatalogHomeSubmission = ({ submission, forms, titleLink, includeActions }) =>
   <div className={`clearfix submission ${submission.coreState}`}>
     <div className="service-icon-wrapper">
       <div className="icn-frame">
@@ -28,9 +29,9 @@ export const CatalogHomeSubmission = ({ submission, forms, includeActions }) =>
             {submission.values.Status}
           </span>
           {
-            includeActions
-              ? <span>{submission.form.name}</span>
-              : <Link to="/requests">{submission.form.name}</Link>
+            titleLink
+              ? <Link to={titleLink}>{submission.form.name}</Link>
+              : <span>{submission.form.name}</span>
           }
         </h5>
         <h6 className="ellipsis">{submission.label}</h6>
@@ -61,6 +62,7 @@ export const CatalogHomeSubmission = ({ submission, forms, includeActions }) =>
             </li>
           }
         </ul>
+        { includeActions && <RequestActionListContainer submission={submission} /> }
       </span>
     </div>
   </div>;
