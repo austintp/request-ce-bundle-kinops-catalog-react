@@ -1,4 +1,5 @@
 import isarray from 'isarray';
+import moment from 'moment';
 
 /**
  * Given a model and an attribute name returns the value of that attribute.
@@ -96,4 +97,16 @@ export const getConfig = ({
     throw new Error('getConfig must be called with at least one of: ' +
       'submission, form, kapp, space.');
   }
+};
+
+export const getDueDate = (submission, attrName) => {
+  const daysDue = getConfig({ submission, name: attrName });
+  if (!daysDue) { throw new Error(`getDueDate failed because "${attrName}" was not set.`); }
+  const daysDueNumber = parseInt(daysDue, 10);
+  if (!daysDueNumber) {
+    throw new Error(`getDueDate failed because value of "${attrName}" (${daysDue}) is not a number`);
+  }
+  return submission.submittedAt
+    ? moment(submission.submittedAt).add(daysDueNumber, 'days')
+    : null;
 };

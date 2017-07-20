@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as helpers from './index';
 
 const spaceWithArray = {
@@ -409,5 +410,84 @@ describe('getConfig', () => {
         })).toBe('DEF');
       });
     });
+  });
+});
+
+describe('getDueDate', () => {
+  const submittedAt = '2017-05-28T20:59:44.929Z';
+  const submittedAtEpoch = moment(submittedAt).unix();
+
+  test('adds days due (from submission) to submitted at', () => {
+    expect(helpers.getDueDate({
+      submittedAt,
+      values: {
+        'Days Due': '4',
+      },
+    }, 'Days Due').unix()).toBe(submittedAtEpoch + (4 * 24 * 60 * 60));
+  });
+
+  test('adds days due (from form) to submitted at', () => {
+    expect(helpers.getDueDate({
+      submittedAt,
+      values: {},
+      form: {
+        attributes: {
+          'Days Due': ['4'],
+        },
+      },
+    }, 'Days Due').unix()).toBe(submittedAtEpoch + (4 * 24 * 60 * 60));
+  });
+
+  test('adds days due (from kapp) to submitted at', () => {
+    expect(helpers.getDueDate({
+      submittedAt,
+      values: {},
+      form: {
+        attributes: {},
+        kapp: {
+          attributes: {
+            'Days Due': ['4'],
+          },
+        },
+      },
+    }, 'Days Due').unix()).toBe(submittedAtEpoch + (4 * 24 * 60 * 60));
+  });
+
+  test('returns null when submitted at is null', () => {
+    expect(helpers.getDueDate({
+      submittedAt: null,
+      values: {
+        'Days Due': '4',
+      },
+    }, 'Days Due')).toBeNull();
+  });
+
+  test('throws when days due attr is not defined', () => {
+    expect(() => {
+      helpers.getDueDate({
+        submittedAt,
+        values: {},
+        form: {
+          attributes: {},
+          kapp: {
+            attributes: {},
+            space: {
+              attributes: {},
+            },
+          },
+        },
+      }, 'Days Due');
+    }).toThrow();
+  });
+
+  test('throws when days due attr is not a number', () => {
+    expect(() => {
+      helpers.getDueDate({
+        submittedAt,
+        values: {
+          'Days Due': 'NaN',
+        },
+      }, 'Days Due');
+    }).toThrow();
   });
 });
