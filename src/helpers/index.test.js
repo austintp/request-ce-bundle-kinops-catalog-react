@@ -562,6 +562,32 @@ describe('getDueDate', () => {
   });
 });
 
+describe('getDurationInDays', () => {
+  test('returns 1 when 1 day difference', () => {
+    const start = '2017-05-28T20:59:44.929Z';
+    const end = '2017-05-29T20:59:44.929Z';
+    expect(helpers.getDurationInDays(start, end)).toBe(1);
+  });
+
+  test('returns 0 when 1 minute difference', () => {
+    const start = '2017-05-29T20:58:44.929Z';
+    const end = '2017-05-29T20:59:44.929Z';
+    expect(helpers.getDurationInDays(start, end)).toBe(0);
+  });
+
+  test('returns .1 when 3 hours difference', () => {
+    const start = '2017-05-29T17:59:44.929Z';
+    const end = '2017-05-29T20:59:44.929Z';
+    expect(helpers.getDurationInDays(start, end)).toBe(0.1);
+  });
+
+  test('returns .5 when 12 hours difference', () => {
+    const start = '2017-05-29T08:59:44.929Z';
+    const end = '2017-05-29T20:59:44.929Z';
+    expect(helpers.getDurationInDays(start, end)).toBe(0.5);
+  });
+});
+
 describe('getStatus', () => {
   test('returns value of status field when it is present', () => {
     expect(helpers.getStatus({

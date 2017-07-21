@@ -120,6 +120,9 @@ export const getDueDate = (submission, attrName) => {
     : null;
 };
 
+export const getDurationInDays = (start, end) =>
+  Math.round(moment(end).diff(start, 'days', true) * 10) / 10;
+
 export const getStatus = submission => {
   if (!submission.values) {
     throw new Error('getStatus failed because values were not included on ' +
