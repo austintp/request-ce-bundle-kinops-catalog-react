@@ -1,15 +1,12 @@
-const getAttributeValue = (object, attributeName, defaultValue = null) => {
-  const attribute = object.attributes[attributeName];
-  const value = attribute && attribute[0];
-  return value || defaultValue;
-};
+import { getAttributeValue } from '../helpers';
+import * as constants from '../constants';
 
 export const Form = object =>
   ({
     name: object.name,
     slug: object.slug,
     description: object.description,
-    icon: getAttributeValue(object, 'Icon', 'fa-cube'),
+    icon: getAttributeValue(object, constants.ATTRIBUTE_ICON, constants.DEFAULT_FORM_ICON),
     categories: object.categorizations.map(c => c.category.slug),
   });
 
@@ -17,7 +14,7 @@ export const Category = object =>
   ({
     name: object.name,
     slug: object.slug,
-    sortOrder: parseInt(getAttributeValue(object, 'Sort Order', 1000), 10),
-    icon: getAttributeValue(object, 'Icon', 'fa-cube'),
-    parent: getAttributeValue(object, 'Parent'),
+    sortOrder: parseInt(getAttributeValue(object, constants.ATTRIBUTE_ORDER, 1000), 10),
+    icon: getAttributeValue(object, constants.ATTRIBUTE_ICON, constants.DEFAULT_CATEGORY_ICON),
+    parent: getAttributeValue(object, constants.ATTRIBUTE_PARENT),
   });

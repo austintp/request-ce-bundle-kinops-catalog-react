@@ -8,12 +8,12 @@ export const COMMENT_FORM = 'comment';
 export const FEEDBACK_FORM = 'feedback';
 
 // Attribute names
-export const DEFAULT_FORM_ICON = 'fa-sticky-note-o';
 export const STATUSES_ACTIVE = 'Statuses - Active';
 export const STATUSES_INACTIVE = 'Statuses - Inactive';
 export const STATUSES_CANCELLED = 'Statuses - Cancelled';
-export const iconAttrName = 'Icon';
-export const defaultServiceIcon = 'fa-cube';
+export const ATTRIBUTE_ICON = 'Icon';
+export const ATTRIBUTE_ORDER = 'Sort Order';
+export const ATTRIBUTE_PARENT = 'Parent';
 
 // Field names
 export const STATUS_FIELD = 'Status';
@@ -26,10 +26,12 @@ export const SUCCESS_LABEL_CLASS = 'label-success';
 export const DANGER_LABEL_CLASS = 'label-danger';
 
 // App values
-export const CORE_STATE_DRAFT = 'draft';
-export const CORE_STATE_SUBMITTED = 'submitted';
-export const CORE_STATE_CLOSED = 'closed';
+export const CORE_STATE_DRAFT = 'Draft';
+export const CORE_STATE_SUBMITTED = 'Submitted';
+export const CORE_STATE_CLOSED = 'Closed';
 
 // Misc config
 export const TIME_AGO_INTERVAL = 10000;
 export const TIME_FORMAT = 'MMMM D, YYYY h:mm A';
+export const DEFAULT_FORM_ICON = 'fa-sticky-note-o';
+export const DEFAULT_CATEGORY_ICON = 'fa-cube';
