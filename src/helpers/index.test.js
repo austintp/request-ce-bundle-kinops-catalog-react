@@ -1,5 +1,6 @@
 import moment from 'moment';
 import * as helpers from './index';
+import * as constants from '../constants';
 
 const spaceWithArray = {
   name: 'Acme',
@@ -558,5 +559,221 @@ describe('getDueDate', () => {
         },
       }, 'Days Due');
     }).toThrow();
+  });
+});
+
+describe('getStatus', () => {
+  test('returns value of status field when it is present', () => {
+    expect(helpers.getStatus({
+      coreState: 'submitted',
+      values: {
+        Status: 'In Progress',
+      },
+    })).toBe('In Progress');
+  });
+
+  test('returns core state when status field is null', () => {
+    expect(helpers.getStatus({
+      coreState: 'submitted',
+      values: {
+        Status: null,
+      },
+    })).toBe('submitted');
+  });
+
+  test('returns core state when status field is not present', () => {
+    expect(helpers.getStatus({
+      coreState: 'submitted',
+      values: {},
+    })).toBe('submitted');
+  });
+
+  test('throws error when values are not included', () => {
+    expect(() => {
+      helpers.getStatus({});
+    }).toThrow();
+  });
+});
+
+describe('getRequester', () => {
+  test('returns value of Requested By field when it is present', () => {
+    expect(helpers.getRequester({
+      submittedBy: 'Bob',
+      values: {
+        'Requested By': 'Rob',
+      },
+    })).toBe('Rob');
+  });
+
+  test('returns submittedBy when Requested By field is null', () => {
+    expect(helpers.getRequester({
+      submittedBy: 'Bob',
+      values: {
+        'Requested By': null,
+      },
+    })).toBe('Bob');
+  });
+
+  test('returns core submittedBy when Requested By field is not present', () => {
+    expect(helpers.getRequester({
+      submittedBy: 'Bob',
+      values: {},
+    })).toBe('Bob');
+  });
+
+  test('throws error when values are not included', () => {
+    expect(() => {
+      helpers.getRequester({});
+    }).toThrow();
+  });
+});
+
+describe('getStatusClass', () => {
+  const values = {};
+  const attributes = {};
+  const statusConfig1 = {};
+  statusConfig1[constants.STATUSES_ACTIVE] = ['In Progress'];
+  statusConfig1[constants.STATUSES_INACTIVE] = ['Saved For Later'];
+  statusConfig1[constants.STATUSES_CANCELLED] = ['Cancelled'];
+  const statusConfig2 = {};
+  statusConfig2[constants.STATUSES_ACTIVE] = ['Active', 'ACTIVE'];
+  statusConfig2[constants.STATUSES_INACTIVE] = ['Inactive', 'INACTIVE'];
+  statusConfig2[constants.STATUSES_CANCELLED] = ['Cancelled', 'CANCELLED'];
+
+  describe('with status field value', () => {
+    describe('using form attributes', () => {
+      test('returns success when active status', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'In Progress' },
+          form: { attributes: statusConfig1, kapp: { attributes: statusConfig2 } },
+        })).toBe(constants.SUCCESS_LABEL_CLASS);
+      });
+
+      test('returns warning when inactive status', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'Saved For Later' },
+          form: { attributes: statusConfig1, kapp: { attributes: statusConfig2 } },
+        })).toBe(constants.WARNING_LABEL_CLASS);
+      });
+
+      test('returns danger when cancelled status', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'Cancelled' },
+          form: { attributes: statusConfig1, kapp: { attributes: statusConfig2 } },
+        })).toBe(constants.DANGER_LABEL_CLASS);
+      });
+
+      test('returns default when other status', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'Other' },
+          form: { attributes: statusConfig1, kapp: { attributes: statusConfig2 } },
+        })).toBe(constants.DEFAULT_LABEL_CLASS);
+      });
+    });
+
+    describe('using kapp attributes', () => {
+      test('returns success when active status', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'ACTIVE' },
+          form: { attributes: {}, kapp: { attributes: statusConfig2 } },
+        })).toBe(constants.SUCCESS_LABEL_CLASS);
+      });
+
+      test('returns warning when inactive status', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'INACTIVE' },
+          form: { attributes: {}, kapp: { attributes: statusConfig2 } },
+        })).toBe(constants.WARNING_LABEL_CLASS);
+      });
+
+      test('returns danger when cancelled status', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'CANCELLED' },
+          form: { attributes: {}, kapp: { attributes: statusConfig2 } },
+        })).toBe(constants.DANGER_LABEL_CLASS);
+      });
+
+      test('returns default when other status', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'Other' },
+          form: { attributes: {}, kapp: { attributes: statusConfig2 } },
+        })).toBe(constants.DEFAULT_LABEL_CLASS);
+      });
+    });
+
+    describe('no attribute configuration', () => {
+      test('returns default label when no attribute configuration', () => {
+        expect(helpers.getStatusClass({
+          values: { Status: 'In Progress' },
+          form: { attributes, kapp: { attributes } },
+        })).toBe(constants.DEFAULT_LABEL_CLASS);
+      });
+    });
+  });
+
+  describe('status field value null', () => {
+    test('returns warning when coreState is draft', () => {
+      expect(helpers.getStatusClass({
+        values,
+        form: { attributes, kapp: { attributes } },
+        coreState: constants.CORE_STATE_DRAFT,
+      })).toBe(constants.WARNING_LABEL_CLASS);
+    });
+
+    test('returns success when coreState is submitted', () => {
+      expect(helpers.getStatusClass({
+        values,
+        form: { attributes, kapp: { attributes } },
+        coreState: constants.CORE_STATE_SUBMITTED,
+      })).toBe(constants.SUCCESS_LABEL_CLASS);
+    });
+
+    test('returns default when coreState is closed', () => {
+      expect(helpers.getStatusClass({
+        values,
+        form: { attributes, kapp: { attributes } },
+        coreState: constants.CORE_STATE_CLOSED,
+      })).toBe(constants.DEFAULT_LABEL_CLASS);
+    });
+
+    test('returns default when coreState is something else', () => {
+      expect(helpers.getStatusClass({
+        values,
+        form: { attributes, kapp: { attributes } },
+        coreState: 'other',
+      })).toBe(constants.DEFAULT_LABEL_CLASS);
+    });
+  });
+
+  describe('missing includes', () => {
+    test('throws error when values are not present', () => {
+      expect(() => {
+        helpers.getStatusClass({ form: { attributes, kapp: { attributes } } });
+      }).toThrow();
+    });
+
+    test('throws error when form is not present', () => {
+      expect(() => {
+        helpers.getStatusClass({ values });
+      }).toThrow();
+    });
+
+    test('throws error when form attributes are not present', () => {
+      expect(() => {
+        helpers.getStatusClass({ values, form: { kapp: { attributes } } });
+      }).toThrow();
+    });
+
+    test('throws error when kapp is not present', () => {
+      expect(() => {
+        helpers.getStatusClass({ values, form: { attributes } });
+      }).toThrow();
+    });
+
+    test('throws error when kapp attributes are not present', () => {
+      expect(() => {
+        helpers.getStatusClass({ values, form: { attributes, kapp: {} } });
+      }).toThrow();
+    });
   });
 });
