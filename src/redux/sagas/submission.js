@@ -8,15 +8,16 @@ import { actions, types } from '../modules/submission';
 import { actions as systemErrorActions } from '../modules/systemError';
 
 export function* fetchSubmissionSaga(action) {
+  const include = 'details,values,form.attributes,form.kapp.attributes,form.kapp.space';
   const { submission, errors, serverError } =
-    yield call(SubmissionsAPI.fetchSubmission, { id: action.payload });
+    yield call(SubmissionsAPI.fetchSubmission, { id: action.payload, include });
 
   if (serverError) {
     yield put(systemErrorActions.setSystemError(serverError));
   } else if (errors) {
     yield put(actions.setSubmissionErrors(errors));
   } else {
-    yield put(actions.setSubmissions(submission));
+    yield put(actions.setSubmission(submission));
   }
 }
 

@@ -2,6 +2,7 @@ export const types = {
   FETCH_SUBMISSION: '@kd/catalog/FETCH_SUBMISSION',
   SET_SUBMISSION: '@kd/catalog/SET_SUBMISSION',
   SET_SUBMISSION_ERRORS: '@kd/catalog/SET_SUBMISSION_ERRORS',
+  CLEAR_SUBMISSION: '@kd/catalog/CLEAR_SUBMISSION',
   CLONE_SUBMISSION: '@kd/catalog/CLONE_SUBMISSION',
   CLONE_SUBMISSION_SUCCESS: '@kd/catalog/CLONE_SUBMISSION_SUCCESS',
   CLONE_SUBMISSION_ERROR: '@kd/catalog/CLONE_SUBMISSION_ERROR',
@@ -14,6 +15,7 @@ export const actions = {
   fetchSubmission: id => ({ type: types.FETCH_SUBMISSION, payload: id }),
   setSubmission: submissions => ({ type: types.SET_SUBMISSION, payload: submissions }),
   setSubmissionErrors: errors => ({ type: types.SET_SUBMISSION_ERRORS, payload: errors }),
+  clearSubmission: () => ({ type: types.CLEAR_SUBMISSION }),
   cloneSubmission: id => ({ type: types.CLONE_SUBMISSION, payload: id }),
   cloneSubmissionSuccess: () => ({ type: types.CLONE_SUBMISSION_SUCCESS }),
   cloneSubmissionErrors: errors => ({ type: types.CLONE_SUBMISSION_ERROR, payload: errors }),
@@ -27,7 +29,7 @@ export const defaultState = {
   cloning: false,
   deleting: false,
   errors: [],
-  data: [],
+  data: null,
 };
 
 const reducer = (state = defaultState, action) => {
@@ -38,6 +40,8 @@ const reducer = (state = defaultState, action) => {
       return { ...state, loading: false, errors: [], data: action.payload };
     case types.SET_SUBMISSION_ERRORS:
       return { ...state, loading: false, errors: state.errors.concat(action.payload) };
+    case types.CLEAR_SUBMISSION:
+      return defaultState;
     case types.CLONE_SUBMISSION:
       return { ...state, cloning: true };
     case types.CLONE_SUBMISSION_SUCCESS:
