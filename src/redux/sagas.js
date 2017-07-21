@@ -3,6 +3,7 @@ import { watchForms } from './sagas/forms';
 import { watchProfile } from './sagas/profile';
 import { watchSubmissions } from './sagas/submissions';
 import { watchSubmission } from './sagas/submission';
+import { watchSubmissionCounts } from './sagas/submissionCounts';
 
 export default function* () {
   yield [
@@ -11,5 +12,6 @@ export default function* () {
     watchProfile(),
     watchSubmissions(),
     watchSubmission(),
+    watchSubmissionCounts(),
   ];
 }

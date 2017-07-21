@@ -20,6 +20,7 @@ export const ATTRIBUTE_SERVICE_OWNING_TEAM = 'Service Owning Team';
 // Field names
 export const STATUS_FIELD = 'Status';
 export const REQUESTED_BY_FIELD = 'Requested By';
+export const REQUESTED_FOR_FIELD = 'Requested For';
 
 // Class names
 export const DEFAULT_LABEL_CLASS = 'label-default';
@@ -33,6 +34,8 @@ export const CORE_STATE_SUBMITTED = 'Submitted';
 export const CORE_STATE_CLOSED = 'Closed';
 
 // Misc config
+export const SUBMISSION_COUNT_LIMIT = 1000;
+export const SUBMISSION_FORM_TYPE = 'Service';
 export const TIME_AGO_INTERVAL = 10000;
 export const TIME_FORMAT = 'MMMM D, YYYY h:mm A';
 export const DEFAULT_FORM_ICON = 'fa-sticky-note-o';

@@ -4,6 +4,7 @@ import profileReducer from './modules/profile';
 import searchReducer from './modules/search';
 import submissionsReducer from './modules/submissions';
 import submissionReducer from './modules/submission';
+import submissionCountsReducer from './modules/submissionCounts';
 import systemErrorReducer from './modules/systemError';
 
 export default {
@@ -13,5 +14,6 @@ export default {
   search: searchReducer,
   submissions: submissionsReducer,
   submission: submissionReducer,
+  submissionCounts: submissionCountsReducer,
   systemError: systemErrorReducer,
 };

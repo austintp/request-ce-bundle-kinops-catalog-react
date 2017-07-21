@@ -1,49 +1,42 @@
 import React from 'react';
-import { Map } from 'immutable';
-import { Link } from 'react-router-dom';
 import { CatalogHomeSubmission } from './CatalogHomeSubmission';
 import { NavHeader } from '../Shared/NavHeader';
+import { CORE_STATE_SUBMITTED } from '../../constants';
 
-const modeToCoreState = Map({
-  Draft: 'Draft',
-  Open: 'Submitted',
-  Closed: 'Closed',
-});
+const submissionMatches = mode => submission =>
+  !mode ||
+  submission.coreState === mode ||
+  (submission.coreState === CORE_STATE_SUBMITTED && mode === 'Open');
 
-const countByMode = (submissions, mode) =>
-  submissions
-    .filter(submission => submission.coreState === modeToCoreState.get(mode))
-    .count();
-
-export const RequestList = ({ submissions, forms, mode, match }) =>
+export const RequestList = ({ submissions, forms, counts, mode, setMode }) =>
   <div>
     <NavHeader breadcrumbs={[{ title: 'My Requests', path: '/requests' }]} />
     <br />
     <div className="content">
       <div className="container requests-nav">
         <ul className="nav nav-tabs">
-          <li role="presentation" className={match.url === '/requests' && 'active'}>
-            <Link to="/requests">
+          <li role="presentation" className={mode === null && 'active'}>
+            <a onClick={() => setMode(null)} role="button" tabIndex={0}>
               All
-            </Link>
+            </a>
           </li>
-          <li role="presentation" className={match.url === '/requests/Open' && 'active'}>
-            <Link to="/requests/Open">
+          <li role="presentation" className={mode === 'Open' && 'active'}>
+            <a onClick={() => setMode('Open')} role="button" tabIndex={0}>
               Open
-              <badge>{countByMode(submissions, 'Open')}</badge>
-            </Link>
+              <badge>{counts.Submitted}</badge>
+            </a>
           </li>
-          <li role="presentation" className={match.url === '/requests/Closed' && 'active'}>
-            <Link to="/requests/Closed">
+          <li role="presentation" className={mode === 'Closed' && 'active'}>
+            <a onClick={() => setMode('Closed')} role="button" tabIndex={0}>
               Closed
-              <badge>{countByMode(submissions, 'Closed')}</badge>
-            </Link>
+              <badge>{counts.Closed}</badge>
+            </a>
           </li>
-          <li role="presentation" className={match.url === '/requests/Draft' && 'active'}>
-            <Link to="/requests/Draft">
+          <li role="presentation" className={mode === 'Draft' && 'active'}>
+            <a onClick={() => setMode('Draft')} role="button" tabIndex={0}>
               Draft
-              <badge>{countByMode(submissions, 'Draft')}</badge>
-            </Link>
+              <badge>{counts.Draft}</badge>
+            </a>
           </li>
         </ul>
       </div>
@@ -51,9 +44,7 @@ export const RequestList = ({ submissions, forms, mode, match }) =>
         <div className="row">
           {
             submissions
-              .filter(submission =>
-                !mode || submission.coreState === modeToCoreState.get(mode),
-              )
+              .filter(submissionMatches(mode))
               .map(submission =>
                 <CatalogHomeSubmission
                   key={submission.id}
