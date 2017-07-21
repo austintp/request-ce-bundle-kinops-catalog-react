@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import * as constants from '../constants';
 
 export class TimeAgo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      formatted: moment(props.timestamp).format(constants.TIME_FORMAT),
       timeAgo: moment(props.timestamp).fromNow(),
     };
   }
@@ -23,6 +25,13 @@ export class TimeAgo extends Component {
   }
 
   render() {
-    return <span>{this.state.timeAgo}</span>;
+    return (
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip>{this.state.formatted}</Tooltip>}
+      >
+        <span>{this.state.timeAgo}</span>
+      </OverlayTrigger>
+    );
   }
 }
