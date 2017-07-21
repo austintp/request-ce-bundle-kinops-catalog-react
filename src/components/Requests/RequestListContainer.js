@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { compose, lifecycle, withProps } from 'recompose';
 import { parse } from 'query-string';
 import { RequestList } from './RequestList';
-import { actions } from '../../redux/modules/submissionCounts';
+import { actions as submissionsActions } from '../../redux/modules/submissions';
+import { actions as submissionCountsActions } from '../../redux/modules/submissionCounts';
 
 const mapStateToProps = state => ({
   forms: state.forms.data,
@@ -11,7 +12,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchSubmissionCounts: actions.fetchSubmissionCounts,
+  fetchSubmissions: submissionsActions.fetchSubmissions,
+  fetchSubmissionCounts: submissionCountsActions.fetchSubmissionCounts,
 };
 
 const parseModeParameter = location => {
@@ -21,6 +23,8 @@ const parseModeParameter = location => {
     : null;
 };
 
+const translateMode = mode => mode === 'Open' ? 'Submitted' : mode;
+
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withProps(props => ({
@@ -28,7 +32,13 @@ const enhance = compose(
   })),
   lifecycle({
     componentWillMount() {
+      this.props.fetchSubmissions(translateMode(this.props.mode));
       this.props.fetchSubmissionCounts();
+    },
+    componentWillUpdate(nextProps) {
+      if (this.props.mode !== nextProps.mode) {
+        this.props.fetchSubmissions(translateMode(nextProps.mode));
+      }
     },
   }),
 );

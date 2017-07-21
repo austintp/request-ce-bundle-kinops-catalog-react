@@ -2,12 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CatalogHomeSubmission } from './CatalogHomeSubmission';
 import { NavHeader } from '../Shared/NavHeader';
-import { CORE_STATE_SUBMITTED } from '../../constants';
-
-const submissionMatches = mode => submission =>
-  !mode ||
-  submission.coreState === mode ||
-  (submission.coreState === CORE_STATE_SUBMITTED && mode === 'Open');
 
 export const RequestList = ({ submissions, forms, counts, mode, match }) =>
   <div>
@@ -44,16 +38,14 @@ export const RequestList = ({ submissions, forms, counts, mode, match }) =>
       <div className="container requests">
         <div className="row">
           {
-            submissions
-              .filter(submissionMatches(mode))
-              .map(submission =>
-                <CatalogHomeSubmission
-                  key={submission.id}
-                  submission={submission}
-                  forms={forms}
-                  includeActions
-                />,
-              )
+            submissions.map(submission =>
+              <CatalogHomeSubmission
+                key={submission.id}
+                submission={submission}
+                forms={forms}
+                includeActions
+              />,
+            )
           }
         </div>
       </div>

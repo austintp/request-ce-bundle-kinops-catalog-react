@@ -2,24 +2,31 @@ import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import { bundle, SubmissionsAPI } from 'react-kinetic-core';
 
-import { SERVICES_KAPP as kappSlug } from '../../constants';
+import * as constants from '../../constants';
 import { actions, types } from '../modules/submissions';
 import { actions as systemErrorActions } from '../modules/systemError';
 
-export function* fetchSubmissionsSaga() {
-  const search =
+export function* fetchSubmissionsSaga({ payload: { coreState, pageToken } }) {
+  const kapp = constants.SERVICES_KAPP;
+  const searchBuilder =
     new SubmissionsAPI.SubmissionSearch()
-      .eq('values[Requested By]', bundle.identity())
+      .type(constants.SUBMISSION_FORM_TYPE)
+      .limit(constants.PAGE_SIZE)
       .includes(['details', 'values', 'form'])
-      .build();
+      .or()
+        .eq(`values[${constants.REQUESTED_FOR_FIELD}]`, bundle.identity())
+        .eq('submittedBy', bundle.identity())
+      .end();
+  // Add some of the optional parameters to the search
+  if (coreState) searchBuilder.coreState(coreState);
+  if (pageToken) searchBuilder.pageToken(pageToken);
+  const search = searchBuilder.build();
 
-  const { submissions, errors, serverError } =
-    yield call(SubmissionsAPI.searchSubmissions, { search, kapp: kappSlug });
+  const { submissions, serverError } =
+    yield call(SubmissionsAPI.searchSubmissions, { search, kapp });
 
   if (serverError) {
     yield put(systemErrorActions.setSystemError(serverError));
-  } else if (errors) {
-    yield put(actions.setSubmissionsErrors(errors));
   } else {
     yield put(actions.setSubmissions(submissions));
   }

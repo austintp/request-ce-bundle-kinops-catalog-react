@@ -36,6 +36,7 @@ export const CORE_STATE_CLOSED = 'Closed';
 // Misc config
 export const SUBMISSION_COUNT_LIMIT = 1000;
 export const SUBMISSION_FORM_TYPE = 'Service';
+export const PAGE_SIZE = 10;
 export const TIME_AGO_INTERVAL = 10000;
 export const TIME_FORMAT = 'MMMM D, YYYY h:mm A';
 export const DEFAULT_FORM_ICON = 'fa-sticky-note-o';

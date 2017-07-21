@@ -15,9 +15,9 @@ import { RequestListContainer } from './Requests/RequestListContainer';
 import { RequestShowContainer } from './Requests/RequestShowContainer';
 import { FormContainer } from './Services/FormContainer';
 
-const mapStateToProps = ({ categories, forms, profile, submissions }) => ({
-  loading: categories.loading || forms.loading || profile.loading || submissions.loading,
-  errors: [...categories.errors, ...forms.errors, ...profile.errors, ...submissions.errors],
+const mapStateToProps = ({ categories, forms, profile }) => ({
+  loading: categories.loading || forms.loading || profile.loading,
+  errors: [...categories.errors, ...forms.errors, ...profile.errors],
 });
 
 const mapDispatchToProps = {
