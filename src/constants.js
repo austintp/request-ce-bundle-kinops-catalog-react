@@ -14,6 +14,8 @@ export const STATUSES_CANCELLED = 'Statuses - Cancelled';
 export const ATTRIBUTE_ICON = 'Icon';
 export const ATTRIBUTE_ORDER = 'Sort Order';
 export const ATTRIBUTE_PARENT = 'Parent';
+export const ATTRIBUTE_SERVICE_DAYS_DUE = 'Service Days Due';
+export const ATTRIBUTE_SERVICE_OWNING_TEAM = 'Service Owning Team';
 
 // Field names
 export const STATUS_FIELD = 'Status';
