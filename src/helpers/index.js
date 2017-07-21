@@ -19,6 +19,14 @@ export const getAttributeValue = ({ attributes }, attrName, defaultValue) =>
       : attributes && attributes[attrName] && attributes[attrName][0]
   ) || defaultValue;
 
+export const getAttributeValues = ({ attributes }, attrName, defaultValue) => {
+  const valuesArray = isarray(attributes)
+    ? attributes.filter(a => a.name === attrName).map(a => a.values)[0]
+    : attributes && attributes[attrName] && attributes[attrName];
+  return !valuesArray || valuesArray.length === 0
+    ? defaultValue
+    : valuesArray;
+};
 
 const getSpaceConfig = (space, name, val) => {
   if (!space) {

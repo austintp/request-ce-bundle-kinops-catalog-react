@@ -132,6 +132,75 @@ describe('getAttributeValue', () => {
   });
 });
 
+
+describe('getAttributeValues', () => {
+  describe('attributes as array', () => {
+    test('returns the value', () => {
+      expect(helpers.getAttributeValues({
+        attributes: [
+          { name: 'Colors', values: ['red', 'green'] },
+        ],
+      }, 'Colors')).toEqual(['red', 'green']);
+    });
+
+    test('returns default array when attribute values is empty', () => {
+      expect(helpers.getAttributeValues({
+        attributes: [
+          { name: 'Colors', values: [] },
+        ],
+      }, 'Colors', ['default'])).toEqual(['default']);
+    });
+
+    test('returns undefined when name does not match', () => {
+      expect(helpers.getAttributeValues({
+        attributes: [],
+      }, 'Other')).toBeUndefined();
+    });
+
+    test('returns default when name does not match', () => {
+      expect(helpers.getAttributeValues({
+        attributes: [],
+      }, 'Other', ['default'])).toEqual(['default']);
+    });
+  });
+
+  describe('attributes as object', () => {
+    test('returns the value', () => {
+      expect(helpers.getAttributeValues({
+        attributes: {
+          Colors: ['red', 'green'],
+        },
+      }, 'Colors')).toEqual(['red', 'green']);
+    });
+
+    test('returns default array when attribute values is empty', () => {
+      expect(helpers.getAttributeValues({
+        attributes: {
+          Colors: [],
+        },
+      }, 'Colors', ['default'])).toEqual(['default']);
+    });
+
+    test('returns undefined when name does not match', () => {
+      expect(helpers.getAttributeValues({
+        attributes: {},
+      }, 'Other')).toBeUndefined();
+    });
+
+    test('returns default when name does not match', () => {
+      expect(helpers.getAttributeValues({
+        attributes: {},
+      }, 'Other', ['default'])).toEqual(['default']);
+    });
+  });
+
+  describe('attributes undefined', () => {
+    test('returns undefined', () => {
+      expect(helpers.getAttributeValues({}, 'name')).toBeUndefined();
+    });
+  });
+});
+
 describe('getConfig', () => {
   // In most of the tests below we only test that the helper propagates to its
   // immediate parent to reduce the number of tests. These test that they
