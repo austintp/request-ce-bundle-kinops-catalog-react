@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CatalogHomeSubmission } from './CatalogHomeSubmission';
 import { NavHeader } from '../Shared/NavHeader';
 import { CORE_STATE_SUBMITTED } from '../../constants';
@@ -8,7 +9,7 @@ const submissionMatches = mode => submission =>
   submission.coreState === mode ||
   (submission.coreState === CORE_STATE_SUBMITTED && mode === 'Open');
 
-export const RequestList = ({ submissions, forms, counts, mode, setMode }) =>
+export const RequestList = ({ submissions, forms, counts, mode, match }) =>
   <div>
     <NavHeader breadcrumbs={[{ title: 'My Requests', path: '/requests' }]} />
     <br />
@@ -16,27 +17,27 @@ export const RequestList = ({ submissions, forms, counts, mode, setMode }) =>
       <div className="container requests-nav">
         <ul className="nav nav-tabs">
           <li role="presentation" className={mode === null && 'active'}>
-            <a onClick={() => setMode(null)} role="button" tabIndex={0}>
+            <Link to={match.path}>
               All
-            </a>
+            </Link>
           </li>
           <li role="presentation" className={mode === 'Open' && 'active'}>
-            <a onClick={() => setMode('Open')} role="button" tabIndex={0}>
+            <Link to={`${match.path}?mode=Open`}>
               Open
               <badge>{counts.Submitted}</badge>
-            </a>
+            </Link>
           </li>
           <li role="presentation" className={mode === 'Closed' && 'active'}>
-            <a onClick={() => setMode('Closed')} role="button" tabIndex={0}>
+            <Link to={`${match.path}?mode=Closed`}>
               Closed
               <badge>{counts.Closed}</badge>
-            </a>
+            </Link>
           </li>
           <li role="presentation" className={mode === 'Draft' && 'active'}>
-            <a onClick={() => setMode('Draft')} role="button" tabIndex={0}>
+            <Link to={`${match.path}?mode=Draft`}>
               Draft
               <badge>{counts.Draft}</badge>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
