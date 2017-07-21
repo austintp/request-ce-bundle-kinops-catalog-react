@@ -29,3 +29,6 @@ export const DANGER_LABEL_CLASS = 'label-danger';
 export const CORE_STATE_DRAFT = 'draft';
 export const CORE_STATE_SUBMITTED = 'submitted';
 export const CORE_STATE_CLOSED = 'closed';
+
+// Misc config
+export const TIME_AGO_INTERVAL = 10000;
