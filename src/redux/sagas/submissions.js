@@ -12,7 +12,8 @@ export function* fetchSubmissionsSaga({ payload: { coreState, pageToken } }) {
     new SubmissionsAPI.SubmissionSearch()
       .type(constants.SUBMISSION_FORM_TYPE)
       .limit(constants.PAGE_SIZE)
-      .includes(['details', 'values', 'form'])
+      .includes(['details', 'values', 'form', 'form.attributes', 'form.kapp',
+        'form.kapp.attributes', 'form.kapp.space.attributes'])
       .or()
         .eq(`values[${constants.REQUESTED_FOR_FIELD}]`, bundle.identity())
         .eq('submittedBy', bundle.identity())

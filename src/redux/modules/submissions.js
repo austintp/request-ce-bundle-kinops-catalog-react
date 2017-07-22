@@ -14,7 +14,7 @@ export const actions = {
 
 export const defaultState = {
   loading: true,
-  data: [],
+  data: List(),
 };
 
 const reducer = (state = defaultState, action) => {

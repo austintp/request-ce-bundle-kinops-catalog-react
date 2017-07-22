@@ -1,32 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import * as helpers from '../../helpers';
+import * as constants from '../../constants';
 import { RequestActionListContainer } from './RequestActionListContainer';
+import { RequestDetailList } from './RequestDetailList';
 
-const statusLabels = {
-  Draft: 'label-warning',
-  Submitted: 'label-success',
-  Closed: 'label-default',
-};
+const getFormIcon = form =>
+  helpers.getAttributeValue(form, constants.ATTRIBUTE_ICON, constants.DEFAULT_FORM_ICON);
 
-const getFormIcon = (submission, forms) =>
-  forms
-    .filter(form => form.name === submission.form.name)
-    .map(form => form.icon)
-    .first() || 'fa-cube';
-
-export const CatalogHomeSubmission = ({ submission, forms, titleLink, includeActions }) =>
+export const CatalogHomeSubmission = ({ submission, titleLink, includeActions }) =>
   <div className={`clearfix submission ${submission.coreState}`}>
     <div className="service-icon-wrapper">
       <div className="icn-frame">
-        <i className={`fa fa-fw ${getFormIcon(submission, forms)}`} />
+        <i className={`fa fa-fw ${getFormIcon(submission.form)}`} />
       </div>
     </div>
     <div className="service-details-wrapper">
       <span className="title__content">
         <h5 className="ellipsis">
-          <span className={`label pull-right ${statusLabels[submission.coreState]}`}>
-            {submission.values.Status}
+          <span className={`label pull-right ${helpers.getStatusClass(submission)}`}>
+            {helpers.getStatus(submission)}
           </span>
           {
             titleLink
@@ -34,34 +27,11 @@ export const CatalogHomeSubmission = ({ submission, forms, titleLink, includeAct
               : <span>{submission.form.name}</span>
           }
         </h5>
-        <h6 className="ellipsis">{submission.label}</h6>
-        <ul className="list-inline meta">
-          <li>
-            <em>Confirmation #: </em>
-            <strong>{submission.handle}</strong>
-          </li>
-          {
-            !submission.submittedAt && !submission.closedAt &&
-            <li>
-              <em>Created: </em>
-              <strong>{moment(submission.createdAt).fromNow()}</strong>
-            </li>
-          }
-          {
-            submission.submittedAt &&
-            <li>
-              <em>Submitted: </em>
-              <strong>{moment(submission.submittedAt).fromNow()}</strong>
-            </li>
-          }
-          {
-            submission.closedAt &&
-            <li>
-              <em>Closed: </em>
-              <strong>{moment(submission.closedAt).fromNow()}</strong>
-            </li>
-          }
-        </ul>
+        {
+          submission.label !== submission.form.name &&
+          <h6 className="ellipsis">{submission.label}</h6>
+        }
+        <RequestDetailList submission={submission} abbreviated={!includeActions} />
         { includeActions && <RequestActionListContainer submission={submission} /> }
       </span>
     </div>

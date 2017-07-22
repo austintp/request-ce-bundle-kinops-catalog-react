@@ -21,6 +21,8 @@ export const ATTRIBUTE_SERVICE_OWNING_TEAM = 'Service Owning Team';
 export const STATUS_FIELD = 'Status';
 export const REQUESTED_BY_FIELD = 'Requested By';
 export const REQUESTED_FOR_FIELD = 'Requested For';
+export const REQUESTED_BY_DISPLAY_NAME_FIELD = 'Requested By Display Name';
+export const REQUESTED_FOR_DISPLAY_NAME_FIELD = 'Requested For Display Name';
 
 // Class names
 export const DEFAULT_LABEL_CLASS = 'label-default';
