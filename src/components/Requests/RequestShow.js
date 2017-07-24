@@ -1,6 +1,7 @@
 import React from 'react';
 import { bundle } from 'react-kinetic-core';
 import { RequestActionListContainer } from './RequestActionListContainer';
+import { RequestActivityList } from './RequestActivityList';
 import { TimeAgo } from '../TimeAgo';
 import * as constants from '../../constants';
 import * as helpers from '../../helpers';
@@ -30,7 +31,7 @@ export const RequestShow = ({ submission, match }) => {
     <div className="content">
       <section className="page">
         <div className="container">
-          <div className="row submission details">
+          <div className="row submission-details">
             <div className="col-xs-12">
               <div className="submission-meta col-md-5 p-y-3">
                 <div className="row form">
@@ -122,7 +123,7 @@ export const RequestShow = ({ submission, match }) => {
                 </div>
               </div>
               <div className="right-details col-md-7 p-y-3">
-                Activity Details
+                <RequestActivityList submission={submission} />
               </div>
             </div>
           </div>

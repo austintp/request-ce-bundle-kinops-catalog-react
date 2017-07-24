@@ -8,8 +8,8 @@ import { actions, types } from '../modules/submission';
 import { actions as systemErrorActions } from '../modules/systemError';
 
 export function* fetchSubmissionSaga(action) {
-  const include = 'details,values,form.attributes,form.kapp.attributes,' +
-    'form.kapp.space.attributes';
+  const include = 'details,values,form,form.attributes,form.kapp.attributes,' +
+    'form.kapp.space.attributes,activities,activities.details';
   const { submission, errors, serverError } =
     yield call(SubmissionsAPI.fetchSubmission, { id: action.payload, include });
 
