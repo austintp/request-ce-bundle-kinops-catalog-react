@@ -10,7 +10,7 @@ const ProfileLink = ({ submitter }) =>
     { submitter === bundle.identity() ? 'you' : submitter }
   </a>;
 
-export const RequestShow = ({ submission }) => {
+export const RequestShow = ({ submission, match }) => {
   if (!submission) {
     return <div />;
   }
@@ -114,7 +114,10 @@ export const RequestShow = ({ submission }) => {
                 </div>
                 <div className="row actions">
                   <div className="col-xs-12">
-                    <RequestActionListContainer submission={submission} />
+                    <RequestActionListContainer
+                      submission={submission}
+                      mode={match.params.mode}
+                    />
                   </div>
                 </div>
               </div>
