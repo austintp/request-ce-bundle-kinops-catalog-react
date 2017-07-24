@@ -26,12 +26,16 @@ export class TimeAgo extends Component {
 
   render() {
     return (
-      <OverlayTrigger
-        placement="top"
-        overlay={<Tooltip>{this.state.formatted}</Tooltip>}
-      >
+      this.props.tooltip === false ? (
         <span>{this.state.timeAgo}</span>
-      </OverlayTrigger>
+      ) : (
+        <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip>{this.state.formatted}</Tooltip>}
+        >
+          <span>{this.state.timeAgo}</span>
+        </OverlayTrigger>
+      )
     );
   }
 }
