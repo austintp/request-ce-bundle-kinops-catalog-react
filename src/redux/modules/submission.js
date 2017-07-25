@@ -9,6 +9,8 @@ export const types = {
   DELETE_SUBMISSION: '@kd/catalog/DELETE_SUBMISSION',
   DELETE_SUBMISSION_SUCCESS: '@kd/catalog/DELETE_SUBMISSION_SUCCESS',
   DELETE_SUBMISSION_ERROR: '@kd/catalog/DELETE_SUBMISSION_ERROR',
+  START_SUBMISSION_POLLER: '@kd/catalog/START_SUBMISSION_POLLER',
+  STOP_SUBMISSION_POLLER: '@kd/catalog/STOP_SUBMISSION_POLLER',
 };
 
 export const actions = {
@@ -22,6 +24,8 @@ export const actions = {
   deleteSubmission: id => ({ type: types.DELETE_SUBMISSION, payload: id }),
   deleteSubmissionSuccess: () => ({ type: types.DELETE_SUBMISSION_SUCCESS }),
   deleteSubmissionErrors: errors => ({ type: types.DELETE_SUBMISSION_ERROR, payload: errors }),
+  startSubmissionPoller: id => ({ type: types.START_SUBMISSION_POLLER, payload: id }),
+  stopSubmissionPoller: () => ({ type: types.STOP_SUBMISSION_POLLER }),
 };
 
 export const defaultState = {

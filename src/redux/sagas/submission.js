@@ -1,5 +1,5 @@
-import { takeEvery } from 'redux-saga';
-import { call, put } from 'redux-saga/effects';
+import { takeEvery, delay } from 'redux-saga';
+import { call, put, cancel, take, fork } from 'redux-saga/effects';
 import { SubmissionsAPI } from 'react-kinetic-core';
 import { Map, Seq } from 'immutable';
 import { push } from 'connected-react-router';
@@ -81,6 +81,42 @@ export function* deleteSubmissionSaga(action) {
     yield put(actions.deleteSubmissionErrors(errors));
   } else {
     yield put(actions.deleteSubmissionSuccess());
+  }
+}
+
+export function* pollerTask(id) {
+  const include = 'details,values,form,form.attributes,form.kapp.attributes,' +
+    'form.kapp.space.attributes,activities,activities.details';
+  let pollDelay = 5000;
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    // Wait
+    yield delay(pollDelay);
+    // Query
+    const { submission, serverError } =
+      yield call(SubmissionsAPI.fetchSubmission, { id, include });
+    // If there is a server error dispatch the appropriate action and break out
+    // of the while loop to stop polling.
+    if (serverError) {
+      yield put(systemErrorActions.setSystemError(serverError));
+      break;
+    } else {
+      yield put(actions.setSubmission(submission));
+      pollDelay = Math.min(pollDelay + 5000, 30000);
+    }
+  }
+}
+
+export function* watchSubmissionPoller() {
+  let action;
+  // eslint-disable-next-line no-cond-assign
+  while (action = yield take(types.START_SUBMISSION_POLLER)) {
+    // start the poller in the background
+    const poller = yield fork(pollerTask, action.payload);
+    // wait for the message to stop the poller
+    yield take(types.STOP_SUBMISSION_POLLER);
+    // stop the poller by cancelling the background task
+    yield cancel(poller);
   }
 }
 
