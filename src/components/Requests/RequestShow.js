@@ -1,6 +1,7 @@
 import React from 'react';
 import { bundle } from 'react-kinetic-core';
 import { RequestActionListContainer } from './RequestActionListContainer';
+import { RequestShowConfirmationContainer } from './RequestShowConfirmationContainer';
 import { RequestActivityList } from './RequestActivityList';
 import { TimeAgo } from '../TimeAgo';
 import { NavHeader } from '../Shared/NavHeader';
@@ -16,10 +17,10 @@ const getBreadcrumbs = (submission, match) => {
     });
   }
   if (match.params.mode === 'review') {
-    result.push({
-      title: 'Review Request',
-      path: `/requests/${match.params.submissionId}/review`,
-    });
+    result.push({ title: 'Review Request' });
+  }
+  if (match.params.mode === 'confirmation') {
+    result.push({ title: 'Confirmation' });
   }
   return result;
 };
@@ -115,6 +116,10 @@ export const RequestShow = ({ submission, match }) =>
             <div className="row submission-details">
               <div className="col-xs-12">
                 <div className="submission-meta col-md-5 p-y-3">
+                  {
+                    match.params.mode === 'confirmation' &&
+                    <RequestShowConfirmationContainer />
+                  }
                   <div className="row form">
                     <div className="col-sm-2 hidden-xs">
                       <div className="icn-frame">
