@@ -1,5 +1,5 @@
 import React from 'react';
-import { bundle } from 'react-kinetic-core';
+import { bundle, CoreForm } from 'react-kinetic-core';
 import { RequestActionListContainer } from './RequestActionListContainer';
 import { RequestShowConfirmationContainer } from './RequestShowConfirmationContainer';
 import { RequestActivityList } from './RequestActivityList';
@@ -7,6 +7,8 @@ import { TimeAgo } from '../TimeAgo';
 import { NavHeader } from '../Shared/NavHeader';
 import * as constants from '../../constants';
 import * as helpers from '../../helpers';
+
+const globals = import('../../globals');
 
 const getBreadcrumbs = (submission, match) => {
   const result = [{ title: 'My Requests', path: '/requests' }];
@@ -161,7 +163,11 @@ export const RequestShow = ({ submission, match }) =>
                   </div>
                 </div>
                 <div className="right-details col-md-7 p-y-3">
-                  <RequestActivityList submission={submission} />
+                  {
+                    match.params.mode === 'review'
+                      ? <CoreForm submission={submission.id} review globals={globals} />
+                      : <RequestActivityList submission={submission} />
+                  }
                 </div>
               </div>
             </div>
