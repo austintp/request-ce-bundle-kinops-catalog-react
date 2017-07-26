@@ -1,7 +1,7 @@
 import React from 'react';
 import { bundle, CoreForm } from 'react-kinetic-core';
 import { RequestActionListContainer } from './RequestActionListContainer';
-import { RequestShowConfirmationContainer } from './RequestShowConfirmationContainer';
+import { RequestShowConfirmationContainer } from './RequestShowConfirmation';
 import { RequestActivityList } from './RequestActivityList';
 import { TimeAgo } from '../TimeAgo';
 import { NavHeader } from '../Shared/NavHeader';
