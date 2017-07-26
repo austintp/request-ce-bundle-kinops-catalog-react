@@ -3,7 +3,17 @@ import { Link } from 'react-router-dom';
 import { CatalogHomeSubmission } from './CatalogHomeSubmission';
 import { NavHeader } from '../Shared/NavHeader';
 
-export const RequestList = ({ submissions, forms, counts, mode, match }) =>
+export const RequestList =
+({
+   submissions,
+   counts,
+   mode,
+   match,
+   hasNextPage,
+   hasPreviousPage,
+   handleNextPage,
+   handlePreviousPage,
+}) =>
   <div>
     <NavHeader breadcrumbs={[{ title: 'My Requests', path: '/requests' }]} />
     <br />
@@ -42,11 +52,30 @@ export const RequestList = ({ submissions, forms, counts, mode, match }) =>
               <CatalogHomeSubmission
                 key={submission.id}
                 submission={submission}
-                forms={forms}
                 includeActions
               />,
             )
           }
+          <div className="m-b-4">
+            {
+              hasPreviousPage &&
+              <button
+                className="btn btn-default pagination-btn pull-left read prev"
+                onClick={handlePreviousPage}
+              >
+                Previous
+              </button>
+            }
+            {
+              hasNextPage &&
+              <button
+                className="btn btn-default pagination-btn pull-right read next"
+                onClick={handleNextPage}
+              >
+                Next
+              </button>
+            }
+          </div>
         </div>
       </div>
     </div>
