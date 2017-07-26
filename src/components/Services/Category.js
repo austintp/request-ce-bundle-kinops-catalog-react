@@ -1,5 +1,5 @@
 import React from 'react';
-import { QuestionsLink } from '../Shared/QuestionsLink';
+import { QuestionsLinkContainer } from '../Shared/QuestionsLink';
 import { ServiceCardLarge } from './ServiceCard';
 import { NavHeader } from '../Shared/NavHeader';
 
@@ -28,6 +28,6 @@ export const Category = ({ category, forms }) =>
           </div>
         </div>
       </section>
-      <QuestionsLink />
+      <QuestionsLinkContainer />
     </div>
   </div>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { QuestionsLink } from '../Shared/QuestionsLink';
+import { QuestionsLinkContainer } from '../Shared/QuestionsLink';
 import { NavHeader } from '../Shared/NavHeader';
 
 const countMatchingForms = (category, forms) =>
@@ -46,6 +46,6 @@ export const CategoryList = ({ categories, forms }) =>
           </div>
         </div>
       </section>
-      <QuestionsLink />
+      <QuestionsLinkContainer />
     </div>
   </div>;

@@ -14,6 +14,7 @@ import { actions as submissionsActions } from '../redux/modules/submissions';
 import { RequestListContainer } from './Requests/RequestListContainer';
 import { RequestShowContainer } from './Requests/RequestShowContainer';
 import { FormContainer } from './Services/FormContainer';
+import { ModalFormContainer } from './Shared/ModalFormContainer';
 
 const mapStateToProps = ({ categories, forms, profile }) => ({
   loading: categories.loading || forms.loading || profile.loading,
@@ -44,6 +45,7 @@ export const App = props => {
       <Route exact path="/requests" component={RequestListContainer} />
       <Route exact path="/requests/:submissionId" component={FormContainer} />
       <Route exact path="/requests/:submissionId/:mode" component={RequestShowContainer} />
+      <ModalFormContainer />
     </div>
   );
 };

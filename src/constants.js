@@ -6,6 +6,7 @@ export const ADMIN_KAPP = 'admin';
 export const CANCEL_FORM = 'request-to-cancel';
 export const COMMENT_FORM = 'comment';
 export const FEEDBACK_FORM = 'feedback';
+export const HELP_FORM = 'help';
 
 // Attribute names
 export const STATUSES_ACTIVE = 'Statuses - Active';
@@ -43,3 +44,29 @@ export const TIME_AGO_INTERVAL = 10000;
 export const TIME_FORMAT = 'MMMM D, YYYY h:mm A';
 export const DEFAULT_FORM_ICON = 'fa-sticky-note-o';
 export const DEFAULT_CATEGORY_ICON = 'fa-cube';
+
+// Utility forms
+export const FEEDBACK_FORM_CONFIG = {
+  formSlug: FEEDBACK_FORM,
+  kappSlug: ADMIN_KAPP,
+  title: 'Provide Feedback',
+  confirmationMessage: 'Thanks for your feedback. We\'ll get that routed to the right team.',
+};
+export const COMMENT_FORM_CONFIG = {
+  formSlug: COMMENT_FORM,
+  kappSlug: SERVICES_KAPP,
+  title: 'Add Comment',
+  confirmationMessage: 'Your comment has been submitted.',
+};
+export const CANCEL_FORM_CONFIG = {
+  formSlug: CANCEL_FORM,
+  kappSlug: SERVICES_KAPP,
+  title: 'Cancel Request',
+  confirmationMessage: 'Your cancellation request has been received.',
+};
+export const HELP_FORM_CONFIG = {
+  formSlug: HELP_FORM,
+  kappSlug: ADMIN_KAPP,
+  title: 'Get Help',
+  confirmationMessage: 'We\'ll get you a response as soon as possible.',
+};

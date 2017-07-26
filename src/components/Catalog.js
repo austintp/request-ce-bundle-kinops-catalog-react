@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { CatalogSearchContainer } from './Services/CatalogSearchContainer';
 import { ServiceCardSmall } from './Services/ServiceCard';
 import { CatalogHomeSubmission } from './Requests/CatalogHomeSubmission';
-import { QuestionsLink } from './Shared/QuestionsLink';
+import { QuestionsLinkContainer } from './Shared/QuestionsLink';
 
 export const Catalog = ({ profile, forms, submissions }) =>
   <div className="content">
@@ -73,7 +73,7 @@ export const Catalog = ({ profile, forms, submissions }) =>
             </div>
           </div>
         </div>
-        <QuestionsLink />
+        <QuestionsLinkContainer />
       </div>
     </div>
   </div>;
