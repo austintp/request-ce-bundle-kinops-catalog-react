@@ -99,6 +99,7 @@ export function* pollerTask(id) {
     // of the while loop to stop polling.
     if (serverError) {
       yield put(systemErrorActions.setSystemError(serverError));
+      yield put(actions.stopSubmissionPoller());
       break;
     } else {
       yield put(actions.setSubmission(submission));
