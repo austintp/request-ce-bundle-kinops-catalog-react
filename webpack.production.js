@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    'babel-polyfill',
+    //'babel-polyfill',
     './src/index.production.js',
   ],
   devtool: 'source-map',

@@ -1,0 +1,59 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *   Global Elements
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+html{
+  position: relative;
+  min-height: 100%;
+  // DO NOT CHANGE FONT-SIZE HERE! 10px base allows for ease of use with rem: 1rem = 10px, 1.4rem = 14px, 3.2rem = 32px, etc.
+  font-size: 10px;
+}
+
+body {
+  font-family: $font-family-base;
+  @include font-size-line-height();
+  color: $text-color;
+  background-color: $body-bg-color;
+  // Sticky footer space
+  margin-bottom: $footer-height;
+  overflow-y: scroll;
+}
+
+body > div#root > div.view-port > div.content > div.container {
+  margin-top: 1.5rem;
+
+  section.search-results {
+    h3 {
+      span.label {
+        line-height: inherit;
+        vertical-align: bottom;
+      }
+    }
+  }
+}
+
+.icn-frame {
+  display: inline-block;
+  font-size: 3.8rem;
+  background: $white;
+  border: 1px solid $lightgray;
+  @include border-radius(0.8rem);
+  padding: .5rem;
+  margin-right: 1rem;
+}
+
+/* Links
+ *-------------------------------------- */
+@include anchor();
+
+a.learn-more{
+  &:before {
+    content: "\f101";
+    font-family: FontAwesome;
+    display: inline-block;
+    padding-right: .3rem;
+    vertical-align: middle;
+  }
+}
+a.issue-link{
+  color: $secondary;
+}

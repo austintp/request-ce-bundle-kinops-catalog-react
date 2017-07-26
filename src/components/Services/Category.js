@@ -2,6 +2,7 @@ import React from 'react';
 import { QuestionsLinkContainer } from '../Shared/QuestionsLink';
 import { ServiceCardLarge } from './ServiceCard';
 import { NavHeader } from '../Shared/NavHeader';
+import { getColor, getAttributeValue } from '../../helpers/utils';
 
 export const Category = ({ category, forms }) =>
   <div>
@@ -9,10 +10,10 @@ export const Category = ({ category, forms }) =>
     <br />
     <div className="container">
       <section className="category-header">
-        <div className="category-icon-bg" style={{ backgroundColor: '#81B922' }}>
+        <div className="category-icon-bg" style={{ backgroundColor: getAttributeValue('Color', category) || getColor(category.slug) }}>
           <span className={`fa ${category.icon}`} />
         </div>
-        <h2 style={{ color: '#81B922' }}>{category.name}</h2>
+        <h2 style={{ color: getAttributeValue('Color', category) || getColor(category.slug) }}>{category.name}</h2>
       </section>
       <section>
         <div className="row">

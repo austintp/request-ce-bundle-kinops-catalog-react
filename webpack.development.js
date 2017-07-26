@@ -15,7 +15,7 @@ console.log('Kinetic Request CE is running at',
 
 module.exports = {
   entry: [
-    'babel-polyfill',
+    //'babel-polyfill',
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:'+config.localPort,
     'webpack/hot/only-dev-server',

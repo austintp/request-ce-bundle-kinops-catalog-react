@@ -1,16 +1,20 @@
+import { watchAlerts } from './sagas/alerts';
 import { watchCategories } from './sagas/categories';
 import { watchForms } from './sagas/forms';
-import { watchProfile } from './sagas/profile';
+import { watchMe } from './sagas/me';
+import { watchSpace } from './sagas/space';
 import { watchSubmissions } from './sagas/submissions';
 import { watchSubmission, watchSubmissionPoller } from './sagas/submission';
 import { watchSubmissionCounts } from './sagas/submissionCounts';
 
 export default function* () {
   yield [
+    watchAlerts(),
     watchCategories(),
     watchForms(),
-    watchProfile(),
+    watchMe(),
     watchSubmissions(),
+    watchSpace(),
     watchSubmission(),
     watchSubmissionPoller(),
     watchSubmissionCounts(),

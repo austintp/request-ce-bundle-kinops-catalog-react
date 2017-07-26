@@ -8,14 +8,16 @@ export const actions = {
   clearSystemError: () => ({ type: types.CLEAR_SYSTEM_ERROR }),
 };
 
-export const defaultState = { data: null };
+export const defaultState = {
+  system: {},
+};
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case types.SET_SYSTEM_ERROR:
-      return { ...state, data: action.payload };
+      return { ...state, system: action.payload };
     case types.CLEAR_SYSTEM_ERROR:
-      return defaultState;
+      return { ...defaultState };
     default:
       return state;
   }

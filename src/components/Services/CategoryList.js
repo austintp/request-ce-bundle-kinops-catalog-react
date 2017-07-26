@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { QuestionsLinkContainer } from '../Shared/QuestionsLink';
 import { NavHeader } from '../Shared/NavHeader';
+import { getColor, getAttributeValue } from '../../helpers/utils';
 
 const countMatchingForms = (category, forms) =>
   forms
@@ -11,8 +12,8 @@ const countMatchingForms = (category, forms) =>
 export const CategoryListCard = ({ category, forms }) =>
   <Link to={`/categories/${category.slug}`}>
     <div className="category-card">
-      <div className="card-content" style={{ borderTopColor: '#81B922' }}>
-        <div className="card-icon-bg" style={{ backgroundColor: '#81B922' }}>
+      <div className="card-content" style={{ borderTopColor: getAttributeValue('Color', category) || getColor(category.slug) }}>
+        <div className="card-icon-bg" style={{ backgroundColor: getAttributeValue('Color', category) || getColor(category.slug) }}>
           <i className={`fa-2x fa ${category.icon}`} />
         </div>
         <div className="card-title">

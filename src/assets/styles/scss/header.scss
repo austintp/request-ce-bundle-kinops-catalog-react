@@ -1,0 +1,335 @@
+// compileNested, nestedFilenamePattern: ../$1.css
+// Core variables and mixins
+@import "variables";
+@import "mixins";
+// Utility classes
+@import "fa";
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *   Header
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+html{
+  position: relative;
+  min-height: 100%;
+
+  body {
+    padding-top: 5rem;
+  }
+
+  .community-help-link {
+    position: fixed;
+    top: 12rem;
+    left: -1.4rem;
+    line-height: 2rem;
+    height: 2.4rem;
+    width: 5rem;
+    padding: 0.2rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    z-index: 2000;
+    font-weight: 700;
+    -webkit-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+    transition: all .3s ease;
+    &:hover {
+      top: 11.8rem;
+      left: -1.2rem;
+      height: 2.8rem;
+      padding-top: 0.6rem;
+    }
+  }
+
+  &#fixed-height-layout {
+    .community-help-link {
+        display: none;
+    }
+  }
+}
+@media (max-width : 767px) {
+  html body .community-help-link {
+    display: none;
+  }
+}
+
+nav#bundle-header {
+  margin-bottom: 0;
+  background-color: $header-color;
+  box-shadow: none;
+  border: 0;
+  @include border-radius(0);
+  @include anchor($header-text-color, lighten($header-text-color, 5%), none, none);
+  @include font-size-line-height(1.6rem, 2rem);
+
+  .navbar-header {
+
+    .navbar-brand {
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      a {
+        @include font-size-line-height(2rem, 2rem);
+
+        &.space-home-link,
+        &.kapp-home-link {
+          padding-right: 0;
+        }
+
+        &.kapp-home-link {
+          font-size: 80%;
+
+          &:before {
+            content: "/";
+          }
+        }
+      }
+    }
+
+    .navbar-toggle {
+      margin: 0.6rem 0;
+      color: $header-text-color;
+      float: left;
+      border: none;
+
+      &:active, &:hover, &:focus {
+        color: lighten($header-text-color, 5%);
+        background: transparent;
+      }
+
+      &:not(.collapsed) .fa:before {
+        content: "\f00d";
+      }
+    }
+
+    .navbar-nav {
+      margin: 0;
+
+      > li {
+        display: inline-block;
+
+        > a {
+          padding: 1.5rem 1rem;
+
+          &#user-menu {
+            padding: 7px 5px 7px 10px;
+
+            > * {
+              vertical-align: middle;
+            }
+
+            img {
+              display: inline-block;
+              @include border-radius(3.6rem);
+            }
+          }
+        }
+
+        &.divider {
+          border-right: 1px solid $lightgray;
+        }
+
+        &.open > a {
+          background-color: transparent;
+        }
+      }
+
+      > li[data-badge-content]:after {
+        content: attr(data-badge-content);
+        pointer-events: none;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 15px;
+        background: $tertiary;
+        color: white;
+        position: absolute;
+        top: 10px;
+        right: 4px;
+        @include border-radius(50%);
+        min-width: 15px;
+        height: 15px;
+        padding: 0;
+      }
+    }
+
+    .right-nav {
+      display: inline-block;
+      float: right;
+      background: transparent;
+      box-shadow: none;
+    }
+
+  }
+
+  .dropdown-menu {
+    background-color: $header-color;
+
+    > li > a {
+      &:hover,
+      &:focus{
+        background: rgba(255,255,255,0.1);
+      }
+    }
+
+    .divider{
+      background-color:rgba(255,255,255,0.15);
+    }
+  }
+
+  .user-tile {
+    overflow: auto;
+    min-width: 240px;
+    padding: 0;
+    color: $lightestgray;
+
+    > * {
+      padding: 1rem;
+    }
+
+    > div.actions {
+      background-color: $lightestgray;
+      border-top: 1px solid tint($lightestgray, 5%);
+      @include anchor($link-color, tint($link-color, 10%), none, none);
+
+      a {
+        display: block;
+
+        &:not(:last-child) {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+
+  .messages-list,
+  .alerts-list {
+    max-height: 320px;
+    overflow: auto;
+    width: 360px;
+    padding: 0;
+
+    > div.heading {
+      background-color: $darkgray;
+      color: $white;
+      padding: 0.5rem;
+      @include anchor($header-text-color, lighten($header-text-color, 5%), none, underline);
+
+      .pull-right {
+        font-size: 85%;
+      }
+    }
+
+    > ul {
+      > li {
+        padding: 0.5rem;
+        border-top: 1px solid tint($darkgray, 10%);
+        @include anchor($header-text-color, $header-text-color, none, none);
+        color: $header-text-color;
+
+          &:hover,
+          &:focus {
+            background-color: rgba(255,255,255,0.1);
+          }
+
+        &.read {
+          opacity: 0.6;
+
+          span.footer .mark-as-read {
+            display: none;
+          }
+        }
+
+        span {
+          &.title, &.body {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          &.title {
+            font-weight: bold;
+
+            .label {
+              background-color: $tertiary;
+              margin-right: 5px;
+            }
+          }
+
+          &.body {
+            font-size: 90%;
+          }
+
+          &.footer {
+            display: block;
+            font-size: 75%;
+            line-height: 1.4rem;
+            opacity: 0.75;
+
+            .mark-as-read:hover {
+              cursor: pointer;
+              text-decoration: underline;
+              color: lighten($header-text-color, 5%);
+            }
+          }
+        }
+      }
+
+      list-style: none;
+      padding: 0;
+    }
+  }
+
+  .navbar-collapse {
+    .navbar-nav {
+      margin: 0;
+      @include font-size-line-height(1.4rem, 1.8rem);
+      list-style: none;
+
+      > li {
+
+        > a {
+          display: block;
+          padding: 1rem;
+
+          &:hover,
+          &:focus{
+            background: rgba(255,255,255,0.1);
+          }
+        }
+
+        &.open > a {
+          background-color: transparent;
+        }
+      }
+
+      .divider {
+        height: 1px;
+        margin: 0.5rem 0;
+        overflow: hidden;
+        background-color:rgba(255,255,255,0.15);
+      }
+    }
+  }
+}
+
+@media (min-width : 768px) {
+  nav#bundle-header {
+    .navbar-header {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width : 767px) {
+  nav#bundle-header {
+    .navbar-header {
+      .right-nav {
+        padding-right: 1rem;
+      }
+    }
+  }
+}

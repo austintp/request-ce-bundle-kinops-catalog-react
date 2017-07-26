@@ -3,7 +3,7 @@ import { CoreForm, CoreModal, CoreModalHeader, CoreModalBody } from 'react-kinet
 
 export const ModalForm = ({ form, completed, handleCompleted, handleDismissed }) =>
   form &&
-  <CoreModal visible size="md" dismissed={handleDismissed}>
+  <CoreModal visible size="60px" dismissed={handleDismissed}>
     <CoreModalHeader>
       <span>{form.title}</span>
       <span

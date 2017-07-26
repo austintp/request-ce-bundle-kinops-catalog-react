@@ -77,7 +77,7 @@ export const RequestActionList =
      cancel,
      mode,
    }) =>
-     <ul className="list-inline actions">
+     <ul className="action-buttons list-inline actions">
        { (!mode || mode === 'review') && ActivityDetailsLink(submission) }
        { ContinueLink(submission) }
        { AddCommentLink(submission, addComment, mode) }

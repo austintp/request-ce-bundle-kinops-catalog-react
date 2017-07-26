@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Catalog } from './Catalog';
 
 const stateMapper = state => ({
-  profile: state.profile.data,
+  profile: state.me.data,
   categories: state.categories.data,
   forms: state.forms.data,
   submissions: state.submissions.data,

@@ -31,7 +31,7 @@ export class TimeAgo extends Component {
       ) : (
         <OverlayTrigger
           placement="top"
-          overlay={<Tooltip>{this.state.formatted}</Tooltip>}
+          overlay={<Tooltip id="timeAgo">{this.state.formatted}</Tooltip>}
         >
           <span>{this.state.timeAgo}</span>
         </OverlayTrigger>
