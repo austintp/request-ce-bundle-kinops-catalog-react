@@ -78,7 +78,7 @@ export const RequestActionList =
      mode,
    }) =>
      <ul className="list-inline actions">
-       { mode === 'review' && ActivityDetailsLink(submission) }
+       { (!mode || mode === 'review') && ActivityDetailsLink(submission) }
        { ContinueLink(submission) }
        { AddCommentLink(submission, addComment, mode) }
        { CloneAsDraftLink(submission, cloneAsDraft, mode) }
