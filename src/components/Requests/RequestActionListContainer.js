@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import { compose, withState, withHandlers } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import { actions } from '../../redux/modules/submission';
+import { actions as modalFormActions } from '../../redux/modules/modalForm';
 import * as constants from '../../constants';
 import { RequestActionList } from './RequestActionList';
 
@@ -9,43 +10,17 @@ export const mapStateToProps = () => ({});
 export const mapDispatchToProps = {
   cloneSubmission: actions.cloneSubmission,
   deleteSubmission: actions.deleteSubmission,
+  openForm: modalFormActions.openForm,
 };
 
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withState('modalForm', 'setModalForm', null),
   withHandlers({
-    addComment: props => () => props.setModalForm({
-      formSlug: constants.COMMENT_FORM,
-      kappSlug: constants.SERVICES_KAPP,
-      completed: false,
-      title: 'Add Comment',
-      confirmationMessage: 'Your comment has been submitted.',
-    }),
-    requestToCancel: props => () => props.setModalForm({
-      formSlug: constants.CANCEL_FORM,
-      kappSlug: constants.SERVICES_KAPP,
-      completed: false,
-      title: 'Cancel Request',
-      confirmationMessage: 'Your cancellation request has been received.',
-    }),
-    feedback: props => () => props.setModalForm({
-      formSlug: constants.FEEDBACK_FORM,
-      kappSlug: constants.ADMIN_KAPP,
-      completed: false,
-      title: 'Provide Feedback',
-      confirmationMessage: 'Thanks for your feedback. We\'ll get that routed to the right team.',
-    }),
+    addComment: props => () => props.openForm(constants.COMMENT_FORM_CONFIG),
+    requestToCancel: props => () => props.openForm(constants.CANCEL_FORM_CONFIG),
+    feedback: props => () => props.openForm(constants.FEEDBACK_FORM_CONFIG),
     cloneAsDraft: props => () => props.cloneSubmission(props.submission.id),
     cancel: props => () => props.deleteSubmission(props.submission.id),
-    handleCompleted: props => () => props.setModalForm({
-      ...props.modalForm,
-      completed: true,
-    }),
-    handleDismissed: props => event => {
-      if (event) event.stopPropagation();
-      props.setModalForm(null);
-    },
   }),
 );
 

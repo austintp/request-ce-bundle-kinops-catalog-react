@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CoreForm, CoreModal, CoreModalHeader, CoreModalBody } from 'react-kinetic-core';
 
 const getBtnClass = mode =>
   typeof mode === 'undefined' ? 'btn btn-link' : 'btn btn-tertiary';
@@ -76,47 +75,15 @@ export const RequestActionList =
      requestToCancel,
      feedback,
      cancel,
-     modalForm,
-     handleCompleted,
-     handleDismissed,
      mode,
    }) =>
-     <div>
-       <ul className="list-inline actions">
-         { mode === 'review' && ActivityDetailsLink(submission) }
-         { ContinueLink(submission) }
-         { AddCommentLink(submission, addComment, mode) }
-         { CloneAsDraftLink(submission, cloneAsDraft, mode) }
-         { RequestToCancelLink(submission, requestToCancel, mode) }
-         { FeedbackLink(submission, feedback, mode) }
-         { CancelLink(submission, cancel, mode) }
-         { mode !== 'review' && ReviewRequestLink(submission, mode) }
-       </ul>
-       {
-         modalForm &&
-         <CoreModal visible size="md" dismissed={handleDismissed}>
-           <CoreModalHeader>
-             <span>{modalForm.title}</span>
-             <span
-               role="button"
-               tabIndex={0}
-               className="fa fa-times pull-right"
-               onClick={handleDismissed}
-             />
-           </CoreModalHeader>
-           <CoreModalBody>
-             {
-               modalForm.completed
-                 ? <h5>{modalForm.confirmationMessage}</h5>
-                 : (
-                   <CoreForm
-                     kapp={modalForm.kappSlug}
-                     form={modalForm.formSlug}
-                     onCompleted={handleCompleted}
-                   />
-                 )
-             }
-           </CoreModalBody>
-         </CoreModal>
-       }
-     </div>;
+     <ul className="list-inline actions">
+       { mode === 'review' && ActivityDetailsLink(submission) }
+       { ContinueLink(submission) }
+       { AddCommentLink(submission, addComment, mode) }
+       { CloneAsDraftLink(submission, cloneAsDraft, mode) }
+       { RequestToCancelLink(submission, requestToCancel, mode) }
+       { FeedbackLink(submission, feedback, mode) }
+       { CancelLink(submission, cancel, mode) }
+       { mode !== 'review' && ReviewRequestLink(submission, mode) }
+     </ul>;
