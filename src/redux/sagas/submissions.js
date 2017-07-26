@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import { bundle, SubmissionsAPI } from 'react-kinetic-core';
+import { bundle, CoreAPI } from 'react-kinetic-core';
 
 import * as constants from '../../constants';
 import { actions, types } from '../modules/submissions';
@@ -9,7 +9,7 @@ import { actions as systemErrorActions } from '../modules/systemError';
 export function* fetchSubmissionsSaga({ payload: { coreState, pageToken } }) {
   const kapp = constants.SERVICES_KAPP;
   const searchBuilder =
-    new SubmissionsAPI.SubmissionSearch()
+    new CoreAPI.SubmissionSearch()
       .type(constants.SUBMISSION_FORM_TYPE)
       .limit(constants.PAGE_SIZE)
       .includes(['details', 'values', 'form', 'form.attributes', 'form.kapp',
@@ -24,7 +24,7 @@ export function* fetchSubmissionsSaga({ payload: { coreState, pageToken } }) {
   const search = searchBuilder.build();
 
   const { submissions, serverError } =
-    yield call(SubmissionsAPI.searchSubmissions, { search, kapp });
+    yield call(CoreAPI.searchSubmissions, { search, kapp });
 
   if (serverError) {
     yield put(systemErrorActions.setSystemError(serverError));
