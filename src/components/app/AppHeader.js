@@ -12,11 +12,11 @@ import { ProfileDropdown } from './ProfileDropdown';
 const MenuIcon = <span className="hidden-xs fa fa-bars fa-lg" />;
 
 const BuildMenuLink = ({ obj, nameOverride = obj.name }) =>
-  <NavItem href={`${obj.kapps ? bundle.spaceLocation() : bundle.kappLocation(obj.slug)}`} key={obj.slug}>
+  <MenuItem href={`${obj.kapps ? bundle.spaceLocation() : bundle.kappLocation(obj.slug)}`} key={obj.slug}>
     <span
       className={classNames('fa fa-fw', getAttributeValue('Icon', obj) || (obj.kapps ? 'fa-home' : 'fa-book'))}
     />{nameOverride}
-  </NavItem>;
+  </MenuItem>;
 
 export const AppHeader = props => {
   const {
@@ -41,9 +41,9 @@ export const AppHeader = props => {
             { (hasAccessToManagement || hasAccessToSupport) && <MenuItem divider /> }
             { hasAccessToManagement && <BuildMenuLink obj={adminKapp} nameOverride="Admin Console" key={adminKapp.slug} />}
             { hasAccessToSupport &&
-              <NavItem href={`${bundle.kappLocation(adminKapp.slug)}/submission-support/`}>
+              <MenuItem href={`${bundle.kappLocation(adminKapp.slug)}/submission-support`}>
                 <span className="fa fa-fw fa-clipboard" />Submission Support
-              </NavItem>
+              </MenuItem>
             }
           </NavDropdown>
         </Nav>
@@ -82,7 +82,7 @@ export const AppHeader = props => {
         { !isGuest(profile) && (hasAccessToManagement || hasAccessToSupport) && <NavItem className="divider" /> }
         { !isGuest(profile) && hasAccessToManagement && <BuildMenuLink obj={adminKapp} nameOverride="Admin Console" key={adminKapp.slug} />}
         { !isGuest(profile) && hasAccessToSupport &&
-          <NavItem href={`${bundle.kappLocation(adminKapp.slug)}/submission-support`}>
+          <NavItem key={'submission-support'} href={`${bundle.kappLocation(adminKapp.slug)}/submission-support`}>
             <span className="fa fa-fw fa-clipboard" />Submission Support
           </NavItem>
         }

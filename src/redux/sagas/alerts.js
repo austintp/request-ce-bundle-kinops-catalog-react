@@ -4,7 +4,6 @@ import { CoreAPI } from 'react-kinetic-core';
 
 import { types, actions } from '../modules/alerts';
 
-
 export function* fetchAlertsSaga() {
   const search = new CoreAPI.SubmissionSearch()
           .eq('values[Status]', 'Active')

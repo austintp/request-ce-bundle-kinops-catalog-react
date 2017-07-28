@@ -1,71 +1,56 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 
 const getBtnClass = mode =>
   typeof mode === 'undefined' ? 'btn btn-link' : 'btn btn-tertiary';
 
 const ActivityDetailsLink = submission =>
   submission.coreState !== 'Draft' &&
-  <li>
-    <Link to={`/requests/${submission.id}/activity`} className="btn btn-tertiary">
-      Activity Details
-    </Link>
-  </li>;
+    <Link to={`/requests/${submission.id}/activity`}>
+      <Button bsClass="btn btn-tertiary">Activity Details</Button>
+    </Link>;
 
 const ContinueLink = submission =>
   submission.coreState === 'Draft' &&
-  <li>
-    <Link to={`/requests/${submission.id}`} className="btn btn-tertiary">
-      Continue
-    </Link>
-  </li>;
+    <Link to={`/requests/${submission.id}`}>
+      <Button bsClass="btn btn-tertiary">Continue</Button>
+    </Link>;
 
 const AddCommentLink = (submission, handleClick, mode) =>
   submission.coreState === 'Submitted' &&
-  <li>
-    <button className={getBtnClass(mode)} onClick={handleClick}>
-      Add Comment
-    </button>
-  </li>;
+    <Button bsClass={getBtnClass(mode)} onClick={handleClick}>
+      Add Coment
+    </Button>;
 
 const CloneAsDraftLink = (submission, handleClick, mode) =>
-  <li>
-    <button className={getBtnClass(mode)} onClick={handleClick}>
-      Clone as Draft
-    </button>
-  </li>;
+  <Button bsClass={getBtnClass(mode)} onClick={handleClick}>
+    Clone as Draft
+  </Button>;
 
 const RequestToCancelLink = (submission, handleClick, mode) =>
   submission.coreState === 'Submitted' &&
-  <li>
-    <button className={getBtnClass(mode)} onClick={handleClick}>
+    <Button bsClass={getBtnClass(mode)} onClick={handleClick}>
       Request to Cancel
-    </button>
-  </li>;
+    </Button>;
 
 const FeedbackLink = (submission, handleClick, mode) =>
   submission.coreState === 'Closed' &&
-  <li>
-    <button className={getBtnClass(mode)} onClick={handleClick}>
+    <Button bsClass={getBtnClass(mode)} onClick={handleClick}>
       Feedback
-    </button>
-  </li>;
+    </Button>;
 
 const CancelLink = (submission, handleClick, mode) =>
   submission.coreState === 'Draft' &&
-  <li>
-    <button className={getBtnClass(mode)} onClick={handleClick}>
+    <Button bsClass={getBtnClass(mode)} onClick={handleClick}>
       Cancel
-    </button>
-  </li>;
+    </Button>;
 
 const ReviewRequestLink = (submission, mode) =>
   submission.coreState !== 'Draft' &&
-  <li>
-    <Link to={`/requests/${submission.id}/review`} className={getBtnClass(mode)}>
+    <Link className={getBtnClass(mode)} to={`/requests/${submission.id}/review`}>
       Review Request
-    </Link>
-  </li>;
+    </Link>;
 
 export const RequestActionList =
   ({
@@ -76,14 +61,17 @@ export const RequestActionList =
      feedback,
      cancel,
      mode,
-   }) =>
-     <ul className="action-buttons list-inline actions">
-       { (!mode || mode === 'review') && ActivityDetailsLink(submission) }
-       { ContinueLink(submission) }
-       { AddCommentLink(submission, addComment, mode) }
-       { CloneAsDraftLink(submission, cloneAsDraft, mode) }
-       { RequestToCancelLink(submission, requestToCancel, mode) }
-       { FeedbackLink(submission, feedback, mode) }
-       { CancelLink(submission, cancel, mode) }
-       { mode !== 'review' && ReviewRequestLink(submission, mode) }
-     </ul>;
+  }) =>
+
+    <div>
+      <ButtonToolbar>
+        { (!mode || mode === 'review') && ActivityDetailsLink(submission) }
+        { ContinueLink(submission) }
+        { AddCommentLink(submission, addComment, mode) }
+        { CloneAsDraftLink(submission, cloneAsDraft, mode) }
+        { RequestToCancelLink(submission, requestToCancel, mode) }
+        { FeedbackLink(submission, feedback, mode) }
+        { CancelLink(submission, cancel, mode) }
+        { mode !== 'review' && ReviewRequestLink(submission, mode) }
+      </ButtonToolbar>
+    </div>;

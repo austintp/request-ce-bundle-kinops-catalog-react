@@ -139,7 +139,7 @@ class AlertsMenu extends Component {
                   <a href={`${bundle.spaceLocation()}/#/alerts/${alert.id}`}>
                     <span className="title">
                       <span className="label">{alert.values.Source}</span>
-                      <span>{alert.values.Content}</span>
+                      <span>{alert.values.Title}</span>
                     </span>
                     <span className="body">{alert.values.Content}</span>
                   </a>
