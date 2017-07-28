@@ -165,7 +165,7 @@ nav#bundle-header {
   }
 
   .dropdown-menu {
-    background-color: $header-color;
+    background-color: inherit;
 
     > li > a {
       &:hover,
