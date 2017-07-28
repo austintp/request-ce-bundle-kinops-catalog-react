@@ -61,7 +61,6 @@ class ProfileMenu extends Component {
 
   render() {
     const { profile, space } = this.props;
-    window.console.log(this.props);
     const backgroundColor = getAttributeValue('Theme Color Primary', space) || '##666';
 
     return (
