@@ -3,6 +3,8 @@ import { RootCloseWrapper } from 'react-overlays';
 import { Dropdown } from 'react-bootstrap';
 import { bundle, CoreForm, CoreModal, CoreModalHeader, CoreModalBody } from 'react-kinetic-core';
 
+import { getAttributeValue } from '../../helpers/utils';
+
 import { Avatar } from './Avatar';
 
 const titles = {
@@ -58,14 +60,21 @@ class ProfileMenu extends Component {
   }
 
   render() {
-    const { profile } = this.props;
+    const { profile, space } = this.props;
+    window.console.log(this.props);
+    const backgroundColor = getAttributeValue('Theme Color Primary', space) || '##666';
+
     return (
       <RootCloseWrapper
         disabled={!this.props.open}
         onRootClose={this.handleRootClose}
         event={this.props.rootCloseEvent}
       >
-        <div className="user-tile dropdown-menu dropdown-menu-right" aria-labelledby={this.props.labelledBy}>
+        <div
+          className="user-tile dropdown-menu dropdown-menu-right"
+          aria-labelledby={this.props.labelledBy}
+          style={{ 'background-color': backgroundColor }}
+        >
           <div>
             <div><b>{profile.displayName}</b></div>
             <div>{profile.email || profile.username}</div>
@@ -137,11 +146,11 @@ class ProfileMenu extends Component {
   }
 }
 
-export const ProfileDropdown = ({ profile }) =>
+export const ProfileDropdown = ({ profile, space }) =>
   <Dropdown
     componentClass={props => <li {...props} className={`hidden-xs clearfix ${props.className}`} />}
     id="user-menu"
   >
     <ProfileToggle bsRole="toggle" profile={profile} />
-    <ProfileMenu bsRole="menu" profile={profile} />
+    <ProfileMenu bsRole="menu" profile={profile} space={space} />
   </Dropdown>;

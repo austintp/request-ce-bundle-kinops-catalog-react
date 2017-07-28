@@ -3,6 +3,8 @@ import { RootCloseWrapper } from 'react-overlays';
 import { Dropdown } from 'react-bootstrap';
 import { bundle, CoreForm, CoreModal, CoreModalHeader, CoreModalBody } from 'react-kinetic-core';
 
+import { getAttributeValue } from '../../helpers/utils';
+
 export const getBadgeAttribute = (alerts, error) =>
   alerts.length > 0 && !error
     ? { 'data-badge-content': alerts.length }
@@ -74,7 +76,10 @@ class AlertsMenu extends Component {
       isGuest,
       labelledBy,
       alerts,
+      space,
     } = this.props;
+
+    const backgroundColor = getAttributeValue('Theme Color Primary', space) || '##666';
 
     return (
       <RootCloseWrapper
@@ -82,8 +87,8 @@ class AlertsMenu extends Component {
         onRootClose={this.handleRootClose}
         event={rootCloseEvent}
       >
-        <div className="dropdown-menu dropdown-menu-right alerts-list" aria-labelledby={labelledBy}>
-          <div className="heading">
+        <div className="dropdown-menu dropdown-menu-right alerts-list" aria-labelledby={labelledBy} style={{ 'background-color': backgroundColor }}>
+          <div className="heading" style={{ 'background-color': backgroundColor }}>
             <span>Alerts</span>
             <span className="pull-right">
               <a role="button" tabIndex={0} onClick={fetchAlerts}>Refresh</a>

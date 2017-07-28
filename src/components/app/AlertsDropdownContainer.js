@@ -6,8 +6,9 @@ import { actions } from '../../redux/modules/alerts';
 
 import { AlertsDropdown } from './AlertsDropdown';
 
-export const stateMapper = ({ alerts, me }) => ({
+export const stateMapper = ({ alerts, me, space }) => ({
   alerts,
+  space: space.data,
   isAdmin: me.data.spaceAdmin,
   isGuest: !me.loading ? isGuest(me.data) : false,
 });
