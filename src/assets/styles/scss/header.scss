@@ -225,7 +225,7 @@ nav#bundle-header {
     > ul {
       > li {
         padding: 0.5rem;
-        border-top: 1px solid tint($darkgray, 10%);
+        border-top: 1px solid tint($lightgray, 10%);
         @include anchor($header-text-color, $header-text-color, none, none);
         color: $header-text-color;
 

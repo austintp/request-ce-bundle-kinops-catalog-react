@@ -5,6 +5,8 @@ import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { createHashHistory } from 'history';
+import { bundle } from 'react-kinetic-core';
+import { parse } from 'query-string';
 
 import { AppContainer } from './components/AppContainer';
 import { configureStore } from './redux/store';
@@ -27,33 +29,53 @@ import { configureStore } from './redux/store';
 // update code in our editor and see changes in the browser without refreshing
 // the page.
 
-// Create the history instance that enables client-side application routing.
-const history = createHashHistory();
+// Handle JSP bundle page= param
+if (window.location.search.includes('?page=')) {
+  const params = parse(window.location.search);
+  const hashes = parse(window.location.hash);
+  if (params.page === 'submission') {
+    window.location = `${bundle.kappLocation()}/#/requests/${params.id}/activity`;
+  } else if (params.page === 'requests') {
+    const mode = Object.keys(hashes).length > 0 ? `?mode=${Object.keys(hashes)[0]}` : '';
+    window.location = `${bundle.kappLocation()}/#/requests${mode}`;
+  } else if (params.page === 'categories') {
+    const category = params.category ? `/${params.category}` : '';
+    window.location = `${bundle.kappLocation()}/#/categories${category}`;
+  }
+  // Handle redirect for /submissions path
+} else if (window.location.hash.includes('/submissions/')) {
+  const id = window.location.hash.split('/submissions/')[1];
+  const mode = window.location.hash.includes('?review') ? '/review' : '/activity';
+  window.location = `${bundle.kappLocation()}/#/requests/${id}${mode}`;
+} else {
+  // Create the history instance that enables client-side application routing.
+  const history = createHashHistory();
 
-// Create the redux store with the configureStore helper found in redux/store.js
-const store = configureStore(history);
+  // Create the redux store with the configureStore helper found in redux/store.js
+  const store = configureStore(history);
 
-// Get the root DOM element in which our entire React app will be rendered.
-const rootElement = document.getElementById('root');
+  // Get the root DOM element in which our entire React app will be rendered.
+  const rootElement = document.getElementById('root');
 
-// Define a render helper function that wraps our root component (AppContainer)
-// with the router, redux store, and hot module loader components.  We want this
-// defined as a function because we want to be able to call it once for the
-// initial page load and again when code changes are detected (see below).
-const render = () => {
-  ReactDOM.render(
-    <HotLoaderContainer>
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Route path="/" component={AppContainer} />
-        </ConnectedRouter>
-      </Provider>
-    </HotLoaderContainer>,
-    rootElement);
-};
+  // Define a render helper function that wraps our root component (AppContainer)
+  // with the router, redux store, and hot module loader components.  We want this
+  // defined as a function because we want to be able to call it once for the
+  // initial page load and again when code changes are detected (see below).
+  const render = () => {
+    ReactDOM.render(
+      <HotLoaderContainer>
+        <Provider store={store}>
+          <ConnectedRouter history={history}>
+            <Route path="/" component={AppContainer} />
+          </ConnectedRouter>
+        </Provider>
+      </HotLoaderContainer>,
+      rootElement);
+  };
 
-// Trigger the initial render of our application.
-render();
+  // Trigger the initial render of our application.
+  render();
 
-// Triggers subsequent re-renders after code changes are detected.
-if (module.hot) module.hot.accept('./components/AppContainer', render);
+  // Triggers subsequent re-renders after code changes are detected.
+  if (module.hot) module.hot.accept('./components/AppContainer', render);
+}

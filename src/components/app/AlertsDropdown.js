@@ -79,7 +79,7 @@ class AlertsMenu extends Component {
       space,
     } = this.props;
 
-    const backgroundColor = getAttributeValue('Theme Color Primary', space) || '##666';
+    const bgColor = getAttributeValue('Theme Color Primary', space) || '#666';
 
     return (
       <RootCloseWrapper
@@ -87,8 +87,8 @@ class AlertsMenu extends Component {
         onRootClose={this.handleRootClose}
         event={rootCloseEvent}
       >
-        <div className="dropdown-menu dropdown-menu-right alerts-list" aria-labelledby={labelledBy} style={{ 'background-color': backgroundColor }}>
-          <div className="heading" style={{ 'background-color': backgroundColor }}>
+        <div className="dropdown-menu dropdown-menu-right alerts-list" aria-labelledby={labelledBy} style={{ backgroundColor: bgColor }}>
+          <div className="heading" style={{ backgroundColor: bgColor }}>
             <span>Alerts</span>
             <span className="pull-right">
               <a role="button" tabIndex={0} onClick={fetchAlerts}>Refresh</a>

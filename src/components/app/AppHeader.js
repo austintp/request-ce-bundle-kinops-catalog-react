@@ -28,15 +28,15 @@ export const AppHeader = props => {
     additionalKapps,
   } = props;
 
-  const backgroundColor = getAttributeValue('Theme Color Primary', space) || '##666';
+  const bgColor = getAttributeValue('Theme Color Primary', space) || '#666';
 
   return (
-    <Navbar fixedTop id="bundle-header" style={{ 'background-color': backgroundColor }}>
+    <Navbar fixedTop id="bundle-header" style={{ backgroundColor: bgColor }}>
       <Navbar.Header>
         <Navbar.Toggle className="dropdown"><span className="fa fa-bars fa-lg fa-fw" /></Navbar.Toggle>
         { !isGuest(profile) &&
           <Nav className="hidden-xs">
-            <NavDropdown noCaret title={MenuIcon} id="linkMenu" style={{ 'background-color': backgroundColor }}>
+            <NavDropdown noCaret title={MenuIcon} id="linkMenu" style={{ backgroundColor: bgColor }}>
               <BuildMenuLink obj={space} />
               <MenuItem divider />
               {predefinedKapps.map(thisKapp =>

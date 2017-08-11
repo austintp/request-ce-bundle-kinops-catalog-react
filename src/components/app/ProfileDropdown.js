@@ -61,7 +61,7 @@ class ProfileMenu extends Component {
 
   render() {
     const { profile, space } = this.props;
-    const backgroundColor = getAttributeValue('Theme Color Primary', space) || '##666';
+    const bgColor = getAttributeValue('Theme Color Primary', space) || '#666';
 
     return (
       <RootCloseWrapper
@@ -72,7 +72,7 @@ class ProfileMenu extends Component {
         <div
           className="user-tile dropdown-menu dropdown-menu-right"
           aria-labelledby={this.props.labelledBy}
-          style={{ 'background-color': backgroundColor }}
+          style={{ backgroundColor: bgColor }}
         >
           <div>
             <div><b>{profile.displayName}</b></div>
