@@ -46,7 +46,8 @@ export const Catalog = ({ profile, forms, submissions }) =>
                     submission,
                     forms,
                     key: submission.id,
-                    titleLink: `/requests/${submission.id}/activity`,
+                    titleLink: submission.coreState === 'Draft' ?
+                      `/requests/${submission.id}` : `/requests/${submission.id}/activity`,
                   }))
                   .map(props => <CatalogHomeSubmission {...props} />)
               }

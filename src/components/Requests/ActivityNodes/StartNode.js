@@ -8,7 +8,7 @@ export const StartNode = ({ label, timestamp }) =>
   <li className="text-center">
     <OverlayTrigger
       placement="right"
-      overlay={<Tooltip>{moment(timestamp).format(TIME_FORMAT)}</Tooltip>}
+      overlay={<Tooltip id={timestamp}>{moment(timestamp).format(TIME_FORMAT)}</Tooltip>}
     >
       <div className="start">
         {label}

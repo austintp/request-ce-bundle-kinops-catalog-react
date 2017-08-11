@@ -92,7 +92,7 @@ label {
   @include font-size(1.4rem);
   font-weight: 600;
   margin-bottom: 0px;
-  
+
   .subtle {
     color: #7e8083;
   }
@@ -125,7 +125,7 @@ label.field-label {
 
 /* Section Page > Form
  *-------------------------------------- */
-section.page {
+div.embedded-core-form {
   .page-header {
     font-weight: 700;
     margin: 0;
@@ -162,7 +162,7 @@ section.page {
 
       label {
         font-weight: 600;
-        
+
         &.field-label {
           cursor: default;
         }

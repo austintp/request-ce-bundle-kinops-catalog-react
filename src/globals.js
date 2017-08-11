@@ -18,4 +18,5 @@ window.jQuery = jquery;
 window.moment = moment;
 window._ = underscore;
 
+require('bootstrap-select');
 require('./lib/kd-typeahead/kd-typeahead');
