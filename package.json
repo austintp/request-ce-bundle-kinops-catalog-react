@@ -50,7 +50,6 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "bootstrap": "^3.3.7",
-    "bootstrap-select": "^1.12.4",
     "classnames": "^2.2.5",
     "connected-react-router": "^4.2.3",
     "font-awesome": "^4.7.0",
