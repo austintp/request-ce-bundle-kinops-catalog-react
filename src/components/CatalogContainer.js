@@ -6,6 +6,7 @@ const stateMapper = state => ({
   categories: state.categories.data,
   forms: state.forms.data,
   submissions: state.submissions.data,
+  space: state.space.data,
 });
 
 export const CatalogContainer = connect(stateMapper)(Catalog);
