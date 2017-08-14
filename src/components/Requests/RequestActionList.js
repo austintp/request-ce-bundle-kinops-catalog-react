@@ -20,7 +20,7 @@ const ContinueLink = submission =>
 const AddCommentLink = (submission, handleClick, mode) =>
   submission.coreState === 'Submitted' &&
     <Button bsClass={getBtnClass(mode)} onClick={handleClick}>
-      Add Coment
+      Add Comment
     </Button>;
 
 const CloneAsDraftLink = (submission, handleClick, mode) =>
